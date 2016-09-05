@@ -1,0 +1,32 @@
+<div class="container w-xxl w-auto-xs">
+	<a href class="navbar-brand block m-t">{{app.full_name}}</a>
+	<div class="m-b-lg text-center">
+		<div class="wrapper text-center">
+			<strong>Login Here</strong>
+		</div>
+		<form name="form" class="form-validation">
+			<div class="text-danger wrapper text-center" ng-show="authError">
+				{{authError}}
+			</div>
+			<div class="list-group list-group-sm">
+				<div class="list-group-item">
+					<input type="email" placeholder="Email" class="form-control no-border" ng-model="user.email" autofocus required>
+				</div>
+				<br/>
+				<div class="list-group-item">
+					<input type="password" placeholder="Password" pattern=".{8,}" class="form-control no-border" ng-model="user.password" required>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()" ng-disabled='form.$invalid'>Log in</button>
+			<div class="text-center m-t m-b">
+				<a ui-sref="access.forgotpwd" class="text-danger-dk text-bold">Forgot password?</a>
+			</div>
+		</form>
+		<div class="ajax_loading text-center" ng-if="isLoading">
+			<img src="img/loading.gif"/>
+		</div>
+	</div>
+	<div class="text-center" ng-include="'tpl/blocks/page_footer.html'">
+		{% include 'blocks/page_footer.html' %}
+	</div>
+</div>

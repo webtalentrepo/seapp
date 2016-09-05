@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html data-ng-app="app" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:og="http://opengraphprotocol.org/schema/"
+      xmlns:fb="http://ogp.me/ns/fb#" lang="en">
+<head prefix="og: http://ogp.me/ns fb: http://ogp.me/ns/fb">
+	<meta charset="utf-8"/>
+	<title>Email Survey</title>
+	<meta name="description" content="Angularjs, Html5"/>
+	<meta name="keywords" content="AngularJS, angular, bootstrap, admin, dashboard, panel, app"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<!-- build:css css/libs.css -->
+	<!-- bower:css -->
+	<link rel="stylesheet" href="../libs/assets/animate.css/animate.css" type="text/css"/>
+	<link rel="stylesheet" href="../libs/assets/font-awesome/css/font-awesome.min.css" type="text/css"/>
+	<link rel="stylesheet" href="../libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css"/>
+	<link rel="stylesheet" href="../libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css"/>
+	<link rel="stylesheet" href="../libs/angular/angular-object-table/build/object-table-style.css" type="text/css"/>
+	<!-- endbower -->
+	<!-- endbuild -->
+	<!-- build:css css/app.min.css -->
+	<link rel="stylesheet" href="css/font.css" type="text/css"/>
+	<link rel="stylesheet" href="css/app.css" type="text/css"/>
+	<link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css"/>
+	<link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css"/>
+	<link rel="stylesheet" href="css/style.css" type="text/css"/>
+	<!-- endbuild -->
+</head>
+<body ng-controller="AppCtrl">
+<div class="app" id="app"
+     ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}"
+     ui-view></div>
+
+<!-- build:js js/app.angular.js -->
+<!-- bower:js -->
+<!-- jQuery -->
+<script src="../libs/jquery/jquery/dist/jquery.js"></script>
+<script src="../libs/jquery/jquery-ui/jquery-ui.js"></script>
+<script src="../libs/jquery/jrac/jrac/jquery.jrac.js"></script>
+<script src="../libs/jquery/color-thief/src/color-thief.js"></script>
+<script src="../libs/jquery/bootstrap3-spinedit/js/bootstrap-spinedit.js"></script>
+<!-- Bootstrap -->
+<script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+
+<!-- Angular -->
+<script src="../libs/angular/angular/angular.js"></script>
+<script src="../libs/angular/angular-animate/angular-animate.js"></script>
+<script src="../libs/angular/angular-cookies/angular-cookies.js"></script>
+<script src="../libs/angular/angular-resource/angular-resource.js"></script>
+<script src="../libs/angular/angular-sanitize/angular-sanitize.js"></script>
+<script src="../libs/angular/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="../libs/angular/ngstorage/ngStorage.js"></script>
+<script src="../libs/angular/angular-object-table/build/object-table.js"></script>
+<script src="../libs/angular/angular-spineditor/src/angular-spineditor.js"></script>
+<script src="../libs/angular/angular-file-upload/angular-file-upload.min.js"></script>
+<script src="../libs/angular/dirPagination/dirPagination.js"></script>
+<!-- bootstrap -->
+<script src="../libs/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<!-- lazyload -->
+<script src="../libs/angular/oclazyload/dist/ocLazyLoad.js"></script>
+<!-- html2canvas -->
+<script src="../libs/jquery/html2canvas/build/html2canvas.js"></script>
+<!-- endbower -->
+
+<!-- App -->
+<script src="js/libs.js"></script>
+<script src="js/app.js"></script>
+<!-- Modules -->
+<script src="js/app/access/access.module.js"></script>
+<script src="js/app/survey/survey.module.js"></script>
+<!-- -- -->
+<!-- Config -->
+<script src="js/config.js"></script>
+<script src="js/config.lazyload.js"></script>
+<script src="js/config.router.js"></script>
+<script src="js/constants.js"></script>
+<script src="js/main.js"></script>
+<!-- -- -->
+<!-- Services -->
+<script src="js/services/ui-load.js"></script>
+<script src="js/services/common.services.js"></script>
+<script src="js/app/access/services/access.rest.js"></script>
+<script src="js/app/access/services/access.model.js"></script>
+<script src="js/app/survey/services/survey.rest.js"></script>
+<script src="js/app/survey/services/survey.model.js"></script>
+<!-- -- -->
+<script src="js/filters/fromNow.js"></script>
+<!-- Directives -->
+<script src="js/directives/setnganimate.js"></script>
+<script src="js/directives/ui-butterbar.js"></script>
+<script src="js/directives/ui-focus.js"></script>
+<script src="js/directives/ui-jq.js"></script>
+<script src="js/directives/ui-module.js"></script>
+<script src="js/directives/ui-nav.js"></script>
+<script src="js/directives/ui-scroll.js"></script>
+<script src="js/directives/ui-shift.js"></script>
+<script src="js/directives/ui-toggleclass.js"></script>
+<script src="js/app/access/access.directives.js"></script>
+<script src="js/app/survey/survey.directives.js"></script>
+<!-- -- -->
+<!-- endbuild -->
+<!-- Lazy loading -->
+</body>
+</html>

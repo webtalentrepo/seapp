@@ -1,0 +1,113 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+	<!-- main -->
+	<div class="col">
+		<!-- main header -->
+		<div class="bg-light lter b-b wrapper-sm">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<small class="m-n font-thin h4 text-bold">
+						Welcome to Surveys for Email
+					</small>
+					<div class="input-group">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+						<input type="text" ng-model="searchText" class="search-choice form-control" placeholder="CHOOSE SURVEYS"/>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<a ui-sref="app.survey.select" class="btn btn-success pull-right">
+						<i class="glyphicon glyphicon-comment"></i> Create Survey
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / right col -->
+</div>
+<div class="hbox hbox-auto-xs hbox-auto-sm no-border bodyCont">
+	<div class="col wrapper-lg w-lg bg-light">
+		<div class="alert alert-warning" ng-if="surveydash.templateList.length == 0">
+			<i class="glyphicon glyphicon-info-sign"></i> Have no any surveys, please
+			<a ui-sref="app.survey.select" class="text-primary">create survey</a>
+		</div>
+		<div class="row">
+			<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+			     dir-paginate="temp in surveydash.templateList|orderBy:sortKey:reverse|filter:searchText|itemsPerPage:itemDisplayLength"
+			     current-page="temp_pagination.current">
+				<div class="panel panel-default select-preview" style="height: 350px;">
+					<div class="panel-heading text-bold h4">
+						{{ temp.temp_name }}
+					</div>
+					<div class="panel-body text-center dashboard-panel">
+						<survey-preview data="temp"></survey-preview>
+					</div>
+					<div class="overlay text-center" title="{{ temp.temp_name }}">
+						<div>
+							<a class="btn btn-info info" ng-click="PreviewTemp(temp)"
+							   uib-tooltip='{{ "Preview " + temp.temp_name }}'
+							   tooltip-enable="true">
+								<i class="glyphicon glyphicon-eye-open"></i> View
+							</a>
+							<span>&nbsp;</span>
+							<a class="btn btn-info info" ng-click="GetEmbedTemp(temp)"
+							   uib-tooltip='{{ "Get " + temp.temp_name }}'
+							   tooltip-enable="true">
+								<i class="glyphicon glyphicon-ok"></i> Get survey
+							</a>
+							<span>&nbsp;</span>
+							<a class="btn btn-info info" ng-click="ReportTemp(temp)"
+							   uib-tooltip='{{ "Report view " + temp.temp_name }}'
+							   tooltip-enable="true">
+								<i class="glyphicon glyphicon-stats"></i> Report
+							</a>
+						</div>
+						<div>
+							<a class="btn btn-rounded btn-primary success" ng-click="CloneTemp(temp)"
+							   uib-tooltip='{{ "Clone " + temp.temp_name }}'
+							   tooltip-enable="true">
+								<i class="glyphicon glyphicon-duplicate"></i> Clone
+							</a>
+							<span>&nbsp;</span>
+							<a class="btn btn-rounded btn-success success" ng-click="EditTemp(temp)"
+							   uib-tooltip='{{ "Edit " + temp.temp_name }}'
+							   tooltip-enable="true">
+								<i class="glyphicon glyphicon-edit"></i> Edit
+							</a>
+							<span>&nbsp;</span>
+							<a class="btn btn-rounded btn-danger success" ng-click="DeleteTemp(temp)"
+							   uib-tooltip='{{ "Delete " + temp.temp_name }}'
+							   tooltip-enable="true">
+								<i class="glyphicon glyphicon-trash"></i> Delete
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<dir-pagination-controls max-size="5" direction-links="true"
+		                         boundary-links="true" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+	</div>
+</div>
+<div id="previewSurvey" class="popin container-fluid">
+	<survey-preview data="surveyData"></survey-preview>
+</div>
+<div id="embedTemp" class="popin container-fluid">
+	<div class="panel panel-default">
+		<div class="panel-body text-center">
+			<div class="h3 text-bold text-center">
+				Embed Link For Email
+			</div>
+			<br/>
+			<div>
+				<textarea id="embedLink" ng-click="clickText()" class="form-control" style="width: 100%;resize: none;" rows="5"
+				          ng-model="surveydash.embedLink"></textarea>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="ajax_loading text-center" ng-if="isLoading">
+	<img src="img/loading.gif"/>
+</div>

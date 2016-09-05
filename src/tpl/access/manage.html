@@ -1,0 +1,97 @@
+<div ng-if="userInfo.is_admin == '7'" class="hbox hbox-auto-xs hbox-auto-sm">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <small class="text-muted">Welcome to Image Redirect Application</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / right col -->
+</div>
+<div ng-if="userInfo.is_admin == '7'" class="panel hbox hbox-auto-xs hbox-auto-sm no-border">
+    <div class="col wrapper-lg w-lg bg-light">
+        <input type="text" ng-model="searchText" style="width: 250px;" class="form-control" placeholder="Search...">
+        <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+        <div class="gridStyle">
+            <table class="table table-bordered table-hover table-condensed bg-white-only">
+                <tr style="font-weight: bold">
+                    <td style="width:15%">First Name</td>
+                    <td style="width:15%">Last Name</td>
+                    <td style="width:20%">User Email</td>
+                    <td style="width:15%">User Password</td>
+                    <td style="width:8%">Admin Status</td>
+                    <td style="width:8%">Edit</td>
+                </tr>
+                <tr dir-paginate="user in manage.users|orderBy:sortKey:reverse|filter:searchText|itemsPerPage:10"
+                    current-page="pagination.current">
+                    <td class="v-middle">
+                        <!-- editable username (text with validation) -->
+                        <span editable-text="user.first_name" e-name="first_name" e-form="rowform"
+                              onbeforesave="manage.checkName($data, 'First name')" e-required>
+                            {{ user.first_name || 'empty' }}
+                        </span>
+                    </td>
+                    <td class="v-middle">
+                        <!-- editable username (text with validation) -->
+                        <span editable-text="user.last_name" e-name="last_name" e-form="rowform"
+                              onbeforesave="manage.checkName($data, 'Last name')" e-required>
+                            {{ user.last_name || 'empty' }}
+                        </span>
+                    </td>
+                    <td class="v-middle">
+                        <!-- editable username (text with validation) -->
+                        <span editable-email="user.user_email" e-name="user_email" e-form="rowform"
+                              onbeforesave="manage.checkName($data, 'Email')" e-required>
+                            {{ user.user_email || 'empty' }}
+                        </span>
+                    </td>
+                    <td class="v-middle">
+                        <!-- editable username (text with validation) -->
+                        <span editable-password="user.user_password" e-name="user_password" e-form="rowform"
+                              onbeforesave="manage.checkName($data, 'Password')" e-required>
+                            {{ user.user_password || 'empty' }}
+                        </span>
+                    </td>
+                    <td class="v-middle">
+                        <!-- editable username (text with validation) -->
+                        <span editable-radiolist="user.user_flag" e-name="user_flag" e-form="rowform"
+                              e-ng-options="s.value as s.text for s in manage.userStatus">
+                            {{ manage.showFlag(user) }}
+                        </span>
+                    </td>
+                    <td style="white-space: nowrap">
+                        <!-- form -->
+                        <form editable-form name="rowform" onbeforesave="manage.saveUser($data, user.id)" ng-show="rowform.$visible"
+                              class="form-buttons form-inline" shown="inserted == user">
+                            <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-sm btn-success">
+                                save
+                            </button>
+                            <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-sm btn-default">
+                                cancel
+                            </button>
+                        </form>
+                        <div class="buttons" ng-show="!rowform.$visible">
+                            <button class="btn btn-sm btn-info" ng-click="rowform.$show()">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" ng-class="{ 'disabled': (user.user_flag == 2) }"
+                                    ng-click="manage.removeUser(user, $index)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <dir-pagination-controls class="pull-right" style="margin-right: 50px;" max-size="8" direction-links="true"
+                                     boundary-links="true" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+            <div class="clearfix"></div>
+            <div>
+                <button class="pull-right btn btn-primary hidden-xs" ng-click="manage.addUser()">Add User</button>
+            </div>
+        </div>
+    </div>
+</div>

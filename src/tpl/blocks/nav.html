@@ -1,0 +1,49 @@
+<!-- list -->
+<ul class="nav">
+	<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+		<span translate="aside.nav.HEADER">Navigation</span>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="app.survey.dashboard" class="auto">
+			<i class="glyphicon glyphicon-stats icon text-primary-dker"></i>
+			<span class="font-bold" translate="aside.nav.DASHBOARD">Dashboard</span>
+		</a>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="app.survey.select" class="auto">
+			<i class="glyphicon glyphicon-plus icon text-success"></i>
+			<span>Generate</span>
+		</a>
+	</li>
+	<li class="line dk hidden-folded"></li>
+	<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+		<span translate="aside.nav.your_stuff.YOUR_STUFF">Your Stuff</span>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="app.page.profile">
+			<i class="icon-user icon text-success-lter"></i>
+			<span>User Info</span>
+		</a>
+	</li>
+	<li ng-if="userInfo.is_admin == '7'" class="line dk"></li>
+	<li ng-if="userInfo.is_admin == '7'" class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+		<span>Admin stuff</span>
+	</li>
+	<li ui-sref-active="active" ng-if="userInfo.is_admin == '7'">
+		<a ui-sref="app.page.manage">
+			<i class="glyphicon glyphicon-th"></i>
+			<span>User Manage</span>
+		</a>
+	</li>
+	<!--<li ng-if="userInfo.is_admin == '7'" class="line dk"></li>-->
+	<!--<li ng-if="userInfo.is_admin == '7'" class="hidden-folded padder m-t m-b-sm text-muted text-xs">-->
+		<!--<span>Dev Stuff</span>-->
+	<!--</li>-->
+	<!--<li ui-sref-active="active" ng-if="userInfo.is_admin == '7'">-->
+		<!--<a ui-sref="app.page.dev">-->
+			<!--<i class="glyphicon glyphicon-wrench"></i>-->
+			<!--<span>Tag Manage</span>-->
+		<!--</a>-->
+	<!--</li>-->
+</ul>
+<!-- / list -->

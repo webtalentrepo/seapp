@@ -1,0 +1,39 @@
+<div class="container w-xl w-auto-xs" ng-init="app.settings.container = false;">
+    <a href class="navbar-brand block m-t">{{app.full_name}}</a>
+    <div class="m-b-lg">
+        <div ng-if="emailFailure" class="m-t">
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" ng-click="emailFailure = false">x</button>
+                Failure! Email is incorrect. Try again!
+            </div>
+        </div>
+        <div class="wrapper text-center">
+            <strong>Input your email to reset your password</strong>
+        </div>
+        <form name="reset" ng-submit="SendMail()">
+            <div class="list-group list-group-sm">
+                <div class="list-group-item">
+                    <input type="email" placeholder="Email" ng-model="UserEmail" class="form-control no-border" required>
+                </div>
+            </div>
+            <button type="submit" ng-disabled="reset.$invalid" class="btn btn-lg btn-primary btn-block">
+                Send
+            </button>
+        </form>
+        <div ng-if="emailSuccess" class="m-t">
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" ng-click="emailSuccess = false">x</button>
+                <p>
+                    A reset link sent to your email address, please check it in 7 days.
+                    <a ui-sref="access.signin" class="btn btn-sm btn-success">Sign in</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center" ng-include="'tpl/blocks/page_footer.html'">
+        {% include 'blocks/page_footer.html' %}
+    </div>
+    <div class="ajax_loading text-center" ng-if="isLoading">
+        <img src="img/loading.gif"/>
+    </div>
+</div>

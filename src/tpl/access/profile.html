@@ -1,0 +1,118 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+	<div class="col">
+		<div style="background:url('img/c5.jpg') center center; background-size: cover;">
+			<div class="wrapper-lg bg-white-opacity">
+				<div class="row m-t">
+					<div class="col-sm-7">
+						<a href class="thumb-lg pull-left m-r">
+							<img src="{{user.photo}}" ng-click="selectFile()" alt="Click here and upload your photo"
+							     class="img-circle profile-photo" title="Click here and upload your photo">
+						</a>
+						<div class="clear m-b">
+							<div class="m-b m-t-sm">
+								<span class="h3 text-black">{{user.first_name + "." + user.last_name}}</span>
+								<small class="m-l">{{user.user_email}}</small>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="wrapper-md">
+	<div class="panel panel-default">
+		<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+		<div class="panel-heading font-bold">
+			User Info
+		</div>
+		<div class="panel-body">
+			<div class="form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-3 control-label">First Name*:</label>
+					<div class="col-sm-9">
+						<p class="form-control-static">
+							<a editable-text="user.first_name" e-required>{{ user.first_name || 'empty' }}</a>
+						</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Last Name*:</label>
+					<div class="col-sm-9">
+						<p class="form-control-static">
+							<a editable-text="user.last_name" e-required>{{ user.last_name || 'empty' }}</a>
+						</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Login Email*: </label>
+					<div class="col-sm-9">
+						<p class="form-control-static">
+							<a editable-email="user.user_email" e-required>{{ user.user_email || 'empty' }}</a>
+						</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Current Password*: </label>
+					<div class="col-sm-9">
+						<p class="form-control-static">
+							<a password="user.user_password">{{ passwordFilter(user.user_password) || 'empty' }}</a>
+						</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">New Password: </label>
+					<div class="col-sm-9">
+						<p class="form-control-static">
+							<a editable-password="user.new_password" e-required>{{ passwordFilter(user.new_password) || 'empty' }}</a>
+						</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Confirm Password: </label>
+					<div class="col-sm-9">
+						<p class="form-control-static">
+							<a editable-password="user.confirm_password" e-required>{{ passwordFilter(user.confirm_password) || 'empty' }}</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+					<button class="btn btn-success pull-right" ng-click="saveProfile()">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="select-photo" class="popin">
+	<div class="hbox hbox-auto-xs">
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<div class="wrapper-sm b-a bg-white m-r-xs m-b-xs">
+				<div class="bg-light" style="height:296px;">
+					<img-crop
+							image="myImage"
+							result-image="myCroppedImage"
+							result-image-size="100"
+							area-type="{{cropType}}"
+					></img-crop>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<div class="inline bg-white wrapper-sm b-a">
+				<div class="bg-light">
+					<img ng-src="{{myCroppedImage}}"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="text-center">
+		<button class="btn btn-primary" id="valid-image">Upload Photo</button>
+		<button class="btn btn-default" id="refuse-image">Cancel</button>
+	</div>
+</div>
+<input type="file" id="fileInput"/>
+<div class="ajax_loading text-center" ng-if="isLoading">
+	<img src="img/loading.gif"/>
+</div>

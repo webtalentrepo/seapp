@@ -1,0 +1,256 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+	<!-- main -->
+	<div class="col">
+		<!-- main header -->
+		<div class="bg-light lter b-b wrapper-sm">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<em class="m-n font-thin h4 text-bold text-primary-dker">
+						{{ surveygen.HeaderTitle }}
+						<em editable-text="surveygen.TempName" e-style="width: 300px;"
+						    onbeforesave="checkTempEmpty($data)">
+							{{ surveygen.TempName || 'Empty' }}
+						</em>&nbsp;and Preview.
+					</em>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<a ui-sref="app.survey.dashboard" class="btn btn-primary pull-right">
+						<i class="glyphicon glyphicon-arrow-left"></i> List
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / right col -->
+</div>
+<div class="hbox hbox-auto-xs hbox-auto-sm no-border">
+	<div class="wrapper-md">
+		<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
+		<div class="row">
+			<div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">
+				<div class="panel panel-default" ng-if="!surveygen.saveComplete">
+					<div class="panel-heading font-bold">
+						Any
+						<span class="editable-click text-primary">underlined</span>
+						element below and button elements is editable to your liking.
+					</div>
+					<div class="panel-body text-center">
+						<section ng-if="surveygen.sectionId == 1">
+							<div class="text-bold position-relative">
+								<div class="form-group">
+									<textarea placeholder="MAIN HEADLINE CAN GO HERE" class="form-control question-statement"
+									          ng-model="surveygen.TempHeader"></textarea>
+									<div class="choose-image" ng-if="surveygen.ImageAddAble" ng-click="chooseFile()">
+										<i class="fa fa-picture-o"></i>
+										<div class="fs-8">add image</div>
+									</div>
+								</div>
+							</div>
+							<div class="margin-top-5 text-center" style="cursor: pointer" ng-if="surveygen.surveyImage != ''">
+								<img ng-src="{{surveygen.surveyImage}}" class="img-responsive img-thumbnail" style="width: 300px;cursor: pointer"/>
+								<button class="btn btn-danger" ng-click="removeImage()">
+									<i class="glyphicon glyphicon-trash"></i>
+								</button>
+							</div>
+							<br/>
+							<div class="h4 margin-top-5">
+								<em editable-textarea="surveygen.TempHeader1" e-rows="5" e-cols="40" e-style="font-size: 14px;"
+								    e-placeholder="e.g. Tell us what you want to learn about?">
+									{{ surveygen.TempHeader1 || 'Enter your headline here' }}
+								</em>
+							</div>
+							<br/>
+							<div class="margin-top-5" ng-repeat="tempButton in surveygen.TempButton">
+								<a class="btn btn-info btn-link h4" style="min-width: 150px;" editable-text="tempButton.name"
+								   e-style="font-size: 14px;" e-placeholder="e.g. {{tempButton.temp}}">
+									{{ tempButton.name || tempButton.temp }}
+								</a>
+								<a ng-click="delBoxes($index)" class="btn-sm btn-danger">
+									<i class="glyphicon glyphicon-trash"></i>
+								</a>
+							</div>
+							<div class="margin-top-5">
+								<button ng-click="addBoxes()" class="btn btn-success">
+									<i class="icon icon-plus"></i> Add More Boxes
+								</button>
+							</div>
+						</section>
+						<section ng-if="surveygen.sectionId == 2">
+							<div class="text-bold position-relative">
+								<div class="form-group">
+									<textarea placeholder="Your Products, Services..." class="form-control question-statement"
+									          ng-model="surveygen.TempHeader"></textarea>
+									<div class="choose-image" ng-if="surveygen.ImageAddAble" ng-click="chooseFile()">
+										<i class="fa fa-picture-o"></i>
+										<div class="fs-8">add image</div>
+									</div>
+								</div>
+							</div>
+							<div class="margin-top-5 text-center" style="cursor: pointer" ng-if="surveygen.surveyImage != ''">
+								<img ng-src="{{surveygen.surveyImage}}" class="img-responsive img-thumbnail" style="width: 300px;cursor: pointer"/>
+								<button class="btn btn-danger" ng-click="removeImage()">
+									<i class="glyphicon glyphicon-trash"></i>
+								</button>
+							</div>
+							<br/>
+							<div class="h4 margin-top-5">
+								<em editable-textarea="surveygen.TempHeader1" e-rows="5" e-cols="40" e-style="font-size: 14px;"
+								    e-placeholder="e.g. How Would You Rate Us?">
+									{{ surveygen.TempHeader1 || 'Your Questions?' }}
+								</em>
+							</div>
+							<br/>
+							<div class="margin-top-5">
+								<div class="inline">
+									<i class="fa fa-3x rate-icon" ng-class="rateClass(rateTemp)" ng-repeat="rateTemp in surveygen.TempRate"></i>
+								</div>
+							</div>
+							<br/>
+							<div class="margin-top-5">
+								<div>
+									
+								</div>
+							</div>
+						</section>
+						<br/>
+						<div class="margin-top-5">
+							<a ui-sref="app.survey.select" class="btn btn-default pull-left">
+								<i class="glyphicon glyphicon-arrow-left"></i> Templates
+							</a>
+							<button ng-click="previewSurvey()" class="btn btn-default pull-none">
+								<i class="glyphicon glyphicon-eye-open"></i> Preview
+							</button>
+							<a ui-sref="app.survey.dashboard" ng-if="surveygen.SE_Type != 'NEW'" class="btn btn-default pull-none">
+								<i class="glyphicon glyphicon-remove"></i> Cancel
+							</a>
+							<button ng-click="nextStep()" class="btn btn-default pull-right">
+								Save <i class="glyphicon glyphicon-arrow-right"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default" ng-if="surveygen.saveComplete">
+					<div class="panel-body text-center">
+						<div class="h3 text-bold text-center">
+							Your Survey is Ready!
+						</div>
+						<div class="h4 text-center margin-top-5">
+							Embed Link For Email
+						</div>
+						<div class="margin-top-5">
+							<textarea id="embedLink" ng-click="clickText()" class="form-control" style="width: 100%;resize: none;" rows="5"
+							          ng-model="surveygen.embedLink"></textarea>
+						</div>
+						<br/>
+						<div class="margin-top-5">
+							<a ng-click="editSurvey()" class="btn btn-default pull-left">
+								<i class="glyphicon glyphicon-arrow-left"></i> Edit Survey
+							</a>
+							<button ng-click="previewSurvey()" class="btn btn-default pull-none">
+								<i class="glyphicon glyphicon-eye-open"></i> View Survey
+							</button>
+							<a ui-sref="app.survey.select" class="btn btn-default pull-right">
+								Create Survey <i class="glyphicon glyphicon-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="add_image" class="popin container-fluid">
+	<div class="row">
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+			<ul id="services" class="nav well">
+				<li ng-class="{'active': navActive('computer')}" ng-click="navClick('computer')">
+					<a><i class="icon icon-home"></i> My Computer</a>
+				</li>
+				<li ng-class="{'active': navActive('url')}" ng-click="navClick('url')">
+					<a><i class="glyphicon glyphicon-download"></i> Link (URL)</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+			<div class="bg-light" ng-show="clickObj == 'computer'" nv-file-drop="" uploader="uploader"
+			     filters="queueLimit, customFilter, imageFilter">
+				<div class="b-a b-2x b-dashed wrapper-lg bg-white text-center container-fluid" style="width: 100%;">
+					<table class="table bg-white-only b-a" ng-if="uploader.queue.length" style="width: 100%; height: 100%;margin-top: 20%;">
+						<thead>
+						<tr>
+							<th class="text-center" width="40%">File Name</th>
+							<th class="text-center" ng-show="uploader.isHTML5">Size</th>
+							<th class="text-center" ng-show="uploader.isHTML5">Progress</th>
+							<th class="text-center" width="5%">Status</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="item in uploader.queue">
+							<td><strong>{{ item.file.name }}</strong></td>
+							<td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+							<td ng-show="uploader.isHTML5">
+								<div class="progress progress-sm m-b-none m-t-xs">
+									<div class="progress-bar bg-info" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+								</div>
+							</td>
+							<td class="text-center">
+								<span ng-show="item.isSuccess" class="text-success"><i class="glyphicon glyphicon-ok"></i></span>
+								<span ng-show="item.isCancel" class="text-warning"><i class="glyphicon glyphicon-ban-circle"></i></span>
+								<span ng-show="item.isError" class="text-danger"><i class="glyphicon glyphicon-remove"></i></span>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<div class="wrapper-lg text-center v-bottom" ng-if="uploader.queue.length" style="margin-bottom: 9%;">
+						<button type="button" class="btn btn-addon btn-success" ng-click="startUpload()"
+						        ng-disabled="!uploader.getNotUploadedItems().length">
+							<i class="fa fa-arrow-circle-o-up"></i> Upload
+						</button>
+						<button type="button" class="btn btn-addon btn-warning" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+							<i class="fa fa-ban"></i> Cancel
+						</button>
+						<button type="button" class="btn btn-addon btn-danger" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+							<i class="fa fa-trash-o"></i> Remove
+						</button>
+					</div>
+					<div class="col-lg-12" ng-if="!uploader.queue.length" style="width: 100%; height: 100%;margin: 30% 0;">
+						<span class="h2 text-bold">Drag Image File Here</span>
+					</div>
+				</div>
+				<div class="wrapper-lg text-center v-bottom">
+					<span class="h4 text-bold pull-left">OR Select one file:</span>
+					<button type="button" class="btn btn-info" id="fileinput-button" ng-disabled="uploader.queue.length">
+						<i class="glyphicon glyphicon-search"></i> Choose File
+					</button>
+					<input type="file" id="fileUploader" nv-file-select="" class="hide" uploader="uploader"/>
+				</div>
+			</div>
+			<div class="wrapper-lg" ng-if="clickObj == 'url'">
+				<div>
+					<span class="h2 text-bold">Image file from the Web</span>
+				</div>
+				<div class="text-center">
+					URL of the file
+					<input type="url" class="form-control" ng-model="surveygen.urlLink"
+					       placeholder="e.g. http://example.com/someImage.jpg" pattern="https?://.+"/>
+				</div>
+				<div class="text-center">Grab any file off the web. Just provide the link.</div>
+				<div class="text-center" ng-if="surveygen.urlLink != ''">
+					<img ng-src="{{surveygen.urlLink}}" style="width: 400px;" class="img-responsive img-thumbnail"/>
+				</div>
+				<div class="text-center">
+					<button class="btn btn-success" ng-click="applyImage()" ng-disabled="surveygen.urlLink == ''">Apply</button>
+				</div>
+			</div>
+			<div>
+				<button class="btn btn-warning pull-right" ng-click="closeModal()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="previewSurvey" class="popin container-fluid">
+	<template-preview data="surveygen"></template-preview>
+</div>
+<div class="ajax_loading text-center" ng-if="surveygen.isLoading">
+	<img src="img/loading.gif"/>
+</div>
