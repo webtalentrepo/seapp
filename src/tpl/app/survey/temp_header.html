@@ -1,0 +1,16 @@
+<div class="text-bold position-relative">
+	<div class="form-group">
+		<textarea placeholder="{{ placeholder }}" class="form-control question-statement"
+		          ng-model="data.TempHeader"></textarea>
+		<div class="choose-image" ng-if="data.ImageAddAble" ng-click="data.chooseFile()">
+			<i class="fa fa-picture-o"></i>
+			<div class="fs-8">add image</div>
+		</div>
+	</div>
+</div>
+<div class="margin-top-5 text-center" style="cursor: pointer" ng-if="data.surveyImage != ''">
+	<img ng-src="{{ data.surveyImage }}" class="img-responsive img-thumbnail" style="width: 300px;cursor: pointer"/>
+	<button class="btn btn-danger" ng-click="removeImage()">
+		<i class="glyphicon glyphicon-trash"></i>
+	</button>
+</div>

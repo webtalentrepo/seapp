@@ -395,18 +395,6 @@ a.disabled {
 	cursor: pointer !important;
 }
 
-.margin-left-6 {
-	margin-left: 6px !important;
-}
-
-.margin-right-6 {
-	margin-right: 6px !important;
-}
-
-.inline {
-	display: inline !important;
-}
-
 .top30 {
 	margin-top: 30px !important;
 }
@@ -546,7 +534,6 @@ a.disabled {
 	width: 100%;
 }
 
-
 .panel-default.select-preview a.info {
 	text-decoration: none;
 	display: inline-block;
@@ -656,11 +643,17 @@ a.disabled {
 }
 
 .rate-icon {
-	padding: 0 3px;
+	padding: 0 2px;
+	cursor: pointer;
 }
 
 .selected-rate {
-	color: greenyellow;
+	color: #e8d834;
+}
+
+.fa-square.selected-rate {
+	width: 39px !important;
+	height: 40px !important;
 }
 
 .dashboard-panel {
@@ -668,4 +661,39 @@ a.disabled {
 	overflow: auto;
 	margin-bottom: 10px;
 	padding-bottom: 0;
+}
+
+.no-select {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.inline-block {
+	display: inline-block !important;
+}
+
+.va-middle {
+	vertical-align: middle;
+}
+
+.padding-right-none {
+	padding-right: 0;
+}
+
+.padding-left-none {
+	padding-left: 0;
+}
+
+.margin-left-6 {
+	margin-left: 6px !important;
+}
+
+.margin-right-6 {
+	margin-right: 6px !important;
+}
+
+.inline {
+	display: inline !important;
 }

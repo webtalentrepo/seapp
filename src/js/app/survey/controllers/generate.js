@@ -28,6 +28,28 @@ app_survey.controller('SelectGenerateController', [
 		if ($localStorage.SE_tempType === 'NEW') {
 			that.HeaderTitle = 'Create ';
 			that.sectionId = that.key_url * 1;
+			that.ImageAddAble = true;
+			/**
+			 * Section 1.
+			 */
+			that.TempButton = [];
+			for (var i = 0; i < 3; i++) {
+				that.TempButton[i] = {temp: ('Enter Info For Box #' + (i + 1)), name: ''};
+			}
+			/**
+			 * Section 2
+			 */
+			that.TempRate = [];
+			for (var j = 0; j < 5; j++) {
+				that.TempRate[j] = {value: (j + 1), selected: false};
+			}
+			that.RateType = 'star';
+			that.RateLabel = {};
+			that.RateLabel.left = '';
+			that.RateLabel.right = '';
+			that.RateOptions = [
+				{type: 'star'}, {type: 'square'}, {type: 'circle'}, {type: 'heart'}
+			];
 		} else {
 			that.HeaderTitle = 'Edit ';
 			that.sectionId = $localStorage.SE_tempType * 1;
@@ -40,13 +62,21 @@ app_survey.controller('SelectGenerateController', [
 					that.temp_key = re.data.key_url;
 					that.TempHeader = re.data.temp_header;
 					that.TempHeader1 = re.data.temp_header1;
+					var tempData = angular.fromJson(re.data.temp_data);
 					if (that.sectionId === 1) {
-						that.TempButton = re.data.temp_data;
+						that.TempButton = tempData;
+					} else if (that.sectionId === 2) {
+						that.TempRate = tempData.rateTemp;
+						that.RateType = tempData.rateType;
+						that.RateLabel = tempData.rateLabel;
+						that.RateOptions = tempData.rateOptions;
 					}
 					that.surveyImage = re.data.temp_image;
 					that.surveyFileName = re.data.temp_file;
-					if (that.surveyImage != '' && that.surveyImage != null) {
+					if ((that.surveyImage != '' && that.surveyImage != null)) {
 						that.ImageAddAble = false;
+					} else if (that.surveyImage === '' || that.surveyImage === null) {
+						that.ImageAddAble = true;
 					}
 				}
 			});
@@ -66,6 +96,11 @@ app_survey.controller('SelectGenerateController', [
 		 * Edit Survey stuff.
 		 */
 		$scope.previewSurvey = function () {
+			if (that.sectionId === 2) {
+				for (var i = 0; i < that.TempRate.length; i++) {
+					that.TempRate[i].selected = false;
+				}
+			}
 			$.fancybox({
 				href: "#previewSurvey",
 				width: 600,
@@ -108,6 +143,14 @@ app_survey.controller('SelectGenerateController', [
 			};
 			if ((that.sectionId * 1) === 1) {
 				params.temp_data = that.TempButton
+			} else if ((that.sectionId * 1) === 2) {
+				var RateData = {
+					rateTemp: that.TempRate,
+					rateType: that.RateType,
+					rateLabel: that.RateLabel,
+					rateOptions: that.RateOptions
+				};
+				params.temp_data = RateData;
 			}
 			params.id = ($localStorage.SE_tempType === 'NEW') ? 'NEW' : that.key_url;
 			that.saveComplete = false;
@@ -141,10 +184,6 @@ app_survey.controller('SelectGenerateController', [
 		/**
 		 * Section 1.
 		 */
-		that.TempButton = [];
-		for (var i = 0; i < 3; i ++) {
-			that.TempButton[i] = {temp: ('Enter Info For Box #' + (i + 1)), name: ''};
-		}
 		$scope.addBoxes = function () {
 			var addInfo = {temp: ('Enter Info For Box #' + (that.TempButton.length + 1)), name: ''};
 			that.TempButton.push(addInfo);
@@ -157,119 +196,49 @@ app_survey.controller('SelectGenerateController', [
 		/**
 		 * Section 2
 		 */
-		that.TempRate = [];
-		that.RateType = 'fa-star';
-		for (var j = 0; j < 5; j ++) {
-			that.TempRate[j] = {value: (j + 1), selected: false};
-		}
-		$scope.rateClass = function (tempItem) {
+		that.RateMin = 3;
+		that.RateMax = 10;
+		that.rateClass = rateClass;
+		function rateClass(tempItem) {
 			if (tempItem.selected) {
-				return that.RateType + 'selected-rate';
+				return 'fa-' + that.RateType + ' selected-rate';
 			} else {
-				return that.RateType + '-o';
+				return 'fa-' + that.RateType + '-o';
 			}
+		}
+		
+		$scope.removeRate = function () {
+			that.TempRate.splice((that.TempRate.length - 1), 1);
+		};
+		$scope.addRate = function () {
+			var addInfo = {value: (that.TempRate.length + 1), selected: false};
+			that.TempRate.push(addInfo);
 		};
 		
 		/**
 		 * Image Add stuff.
 		 */
-		that.ImageAddAble = true;
 		that.urlLink = "";
 		that.surveyImage = '';
 		that.surveyFileName = '';
-		$scope.clickObj = 'computer';
-		$scope.chooseFile = function () {
-			$.fancybox({
-				href: "#add_image",
-				modal: true,
-				width: 800,
-				height: 550,
-				autoSize: false,
-				scrolling: "no"
-			});
-		};
-		$scope.closeModal = function () {
-			that.urlLink = "";
-			uploader.clearQueue();
-			$scope.clickObj = 'computer';
-			that.surveyImage = '';
-			that.surveyFileName = '';
-			that.ImageAddAble = true;
-			$.fancybox.close();
-		};
-		$scope.navClick = function (flag) {
-			$scope.clickObj = flag;
-		};
-		$scope.navActive = function (flag) {
-			return $scope.clickObj === flag;
-		};
-		
 		$scope.uploadUrl = APP_SETTINGS.API_ROOT_URL + 'survey/uploadimage';
-		var uploader = $scope.uploader = new FileUploader({
+		that.uploader = new FileUploader({
 			url: $scope.uploadUrl,
 			formData: [
 				{user_id: userInfo.user_id}
 			]
 		});
-		uploader.filters.push({
-			name: 'imageFilter',
-			fn: function (item /*{File|FileLikeObject}*/, options) {
-				var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-				return '|jpg|jpeg|png|bmp|gif|'.indexOf(type) !== -1;
-			}
-		});
-		uploader.filters.push({
-			name: 'customFilter',
-			fn: function (item /*{File|FileLikeObject}*/, options) {
-				return this.queue.length < 1;
-			}
-		});
-		uploader.onCompleteItem = function (fileItem, response, status, headers) {
-			if (response == "" || response == null || response.length < 1) {
-				toaster.pop('error', 'Error!', 'File Upload is failed.');
-				uploader.clearQueue();
-				return;
-			}
-			var re = angular.fromJson(response);
-			if (re.result === 'success') {
-				$scope.closeModal();
-				that.surveyImage = APP_SETTINGS.API_ROOT_URL + 'uploads/survey/' + re.file_name;
-				that.surveyFileName = re.file_name;
-				that.ImageAddAble = false;
-			}
-			uploader.clearQueue();
-		};
-		
-		angular.element(document.querySelector('#fileinput-button')).on('click', function () {
-			$("#fileUploader").trigger("click");
-		});
-		$scope.startUpload = function () {
-			uploader.uploadAll();
-		};
-		$scope.applyImage = function () {
-			that.surveyImage = that.urlLink;
-			that.ImageAddAble = false;
-			that.urlLink = "";
-			uploader.clearQueue();
-			$scope.clickObj = 'computer';
-			that.surveyFileName = '';
-			$.fancybox.close();
-		};
-		$scope.removeImage = function () {
-			if (that.surveyFileName === '' || that.surveyFileName === null) {
-				that.surveyImage = '';
-				that.ImageAddAble = true;
-				return;
-			}
-			var param = {
-				file_name: that.surveyFileName
-			};
-			surveyModelService.RemoveSurveyImage(param).then(function (re) {
-				that.surveyImage = '';
-				that.surveyFileName = '';
-				that.ImageAddAble = true;
+		that.chooseFile = chooseFile;
+		function chooseFile() {
+			$.fancybox({
+				href: "#add_image",
+				modal: true,
+				width: 800,
+				height: 650,
+				autoSize: false,
+				scrolling: "no"
 			});
-		};
+		}
 	}]
 );
 
