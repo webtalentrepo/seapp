@@ -50,6 +50,12 @@ app_survey.controller('SelectGenerateController', [
 			that.RateOptions = [
 				{type: 'star'}, {type: 'square'}, {type: 'circle'}, {type: 'heart'}
 			];
+			/**
+			 * Section 3
+			 */
+			that.answerButton = [];
+			that.answerButton[0] = {temp: 'YES', name: ''};
+			that.answerButton[1] = {temp: 'NO', name: ''};
 		} else {
 			that.HeaderTitle = 'Edit ';
 			that.sectionId = $localStorage.SE_tempType * 1;
@@ -70,6 +76,8 @@ app_survey.controller('SelectGenerateController', [
 						that.RateType = tempData.rateType;
 						that.RateLabel = tempData.rateLabel;
 						that.RateOptions = tempData.rateOptions;
+					} else if (that.sectionId === 3) {
+						that.answerButton = tempData;
 					}
 					that.surveyImage = re.data.temp_image;
 					that.surveyFileName = re.data.temp_file;
@@ -112,7 +120,8 @@ app_survey.controller('SelectGenerateController', [
 		$scope.nextStep = function () {
 			var messageArray = [
 				'Please insert main headline.',
-				'Please insert your products, services...'
+				'Please insert your products, services...',
+				'Please insert your questions.'
 			];
 			if (that.TempHeader === '' || that.TempHeader === null || that.TempHeader === undefined) {
 				toaster.pop('error', 'Error!', messageArray[(that.sectionId * 1 - 1)]);
@@ -127,6 +136,14 @@ app_survey.controller('SelectGenerateController', [
 					if (that.TempButton[i].name === '' || that.TempButton[i].name === null || that.TempButton[i].name === undefined) {
 						var buttonError = 'Please ' + that.TempButton[i].temp;
 						toaster.pop('error', 'Error!', buttonError);
+						return false;
+					}
+				}
+			} else if ((that.sectionId * 1) === 3) {
+				for (var j = 0; j < that.answerButton.length; j++) {
+					if (that.answerButton[j].name === '' || that.answerButton[j].name === null || that.answerButton[j].name === undefined) {
+						var Error = 'Please insert answer buttons label.';
+						toaster.pop('error', 'Error!', Error);
 						return false;
 					}
 				}
@@ -151,6 +168,8 @@ app_survey.controller('SelectGenerateController', [
 					rateOptions: that.RateOptions
 				};
 				params.temp_data = RateData;
+			} else if ((that.sectionId * 1) === 3) {
+				params.temp_data = that.answerButton;
 			}
 			params.id = ($localStorage.SE_tempType === 'NEW') ? 'NEW' : that.key_url;
 			that.saveComplete = false;
@@ -206,7 +225,6 @@ app_survey.controller('SelectGenerateController', [
 				return 'fa-' + that.RateType + '-o';
 			}
 		}
-		
 		$scope.removeRate = function () {
 			that.TempRate.splice((that.TempRate.length - 1), 1);
 		};

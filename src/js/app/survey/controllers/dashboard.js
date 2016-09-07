@@ -44,24 +44,6 @@ app_survey.controller('DashboardSurveyController', [
 			};
 		}
 		$scope.itemDisplayLength = 6;
-		$scope.itemDisplayLength1 = $scope.itemDisplayLength;
-		$window.onresize = function () {
-			var currWidth = angular.element(document.querySelector(".bodyCont"))[0].clientWidth * 1;
-			if (currWidth >= 981) {
-				$scope.itemDisplayLength = 6;
-			} else if (currWidth < 981 && currWidth > 748) {
-				$scope.itemDisplayLength = 4;
-			} else if (currWidth < 748 && currWidth > 414) {
-				$scope.itemDisplayLength = 2;
-			} else if (currWidth <= 414) {
-				$scope.itemDisplayLength = 1;
-			}
-			if ($scope.itemDisplayLength1 !== $scope.itemDisplayLength) {
-				getTempList();
-			}
-			$scope.itemDisplayLength1 = $scope.itemDisplayLength;
-		};
-		$window.onresize();
 		
 		$scope.PreviewTemp = function (temp) {
 			$scope.surveyData = temp;

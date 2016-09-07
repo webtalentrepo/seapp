@@ -27,12 +27,19 @@
 	<div class="wrapper-md">
 		<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
 		<div class="row">
-			<div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">
+			<div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-2 col-sm-offset-0 col-xs-offset-0 max-width-600">
 				<div class="panel panel-default" ng-if="!surveygen.saveComplete">
 					<div class="panel-heading font-bold">
 						Any
 						<span class="editable-click text-primary">underlined</span>
 						element below and button elements is editable to your liking.
+						<div>
+							Subject:
+							<em editable-text="surveygen.TempName" e-style="width: 300px;"
+							    onbeforesave="checkTempEmpty($data)">
+								{{ surveygen.TempName || 'Empty' }}
+							</em>
+						</div>
 					</div>
 					<div class="panel-body text-center">
 						<section ng-if="surveygen.sectionId == 1">
@@ -122,7 +129,21 @@
 						</section>
 						<section ng-if="surveygen.sectionId == 3">
 							<temp-header data="surveygen" placeholder="Your Questions Here...(e.g. How was your experience?)"></temp-header>
-							
+							<br/>
+							<div class="margin-top-5 row">
+								<div class="col-sm-6 col-xs-6">
+									<a class="btn btn-lg btn-rounded btn-success pull-right" editable-text="surveygen.answerButton[0].name"
+									   e-placeholder="e.g. {{ surveygen.answerButton[0].temp }}">
+										{{ surveygen.answerButton[0].name || 'e.g. GOOD' }}
+									</a>
+								</div>
+								<div class="col-sm-6 col-xs-6">
+									<a class="btn btn-lg btn-rounded btn-danger pull-left" editable-text="surveygen.answerButton[1].name"
+									   e-placeholder="e.g. {{ surveygen.answerButton[1].temp }}">
+										{{ surveygen.answerButton[1].name || 'e.g. BAD' }}
+									</a>
+								</div>
+							</div>
 						</section>
 						<br/>
 						<div class="margin-top-5">

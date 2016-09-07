@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default max-width-600">
 	<div class="panel-body text-center">
 		<section ng-if="data.section_id == 1">
 			<div class="text-bold h2">
@@ -19,6 +19,7 @@
 			</div>
 		</section>
 		<section ng-if="data.section_id == 2">
+			<br/>
 			<div class="text-bold h2">
 				{{data.temp_header || 'Empty'}}
 			</div>
@@ -29,7 +30,7 @@
 			<div class="h4 margin-top-5">
 				{{data.temp_header1 || ''}}
 			</div>
-			<br/>
+			<br/><br/>
 			<div class="margin-top-5">
 				<div class="inline" ng-repeat="tempItem in data.temp_data.rateTemp">
 					<i class="fa fa-3x rate-icon" ng-click="RateScore($index)" ng-class="RateIcon(tempItem)"></i>
@@ -42,6 +43,24 @@
 				</div>
 				<div class="pull-right">
 					{{ data.temp_data.rateLabel.right || '' }}
+				</div>
+			</div>
+		</section>
+		<section ng-if="data.section_id == 3">
+			<br/>
+			<div class="text-bold h2">
+				{{ data.temp_header || 'Empty Question' }}
+			</div>
+			<div class="margin-top-5" ng-if="data.temp_image != ''">
+				<img ng-src="{{data.temp_image}}" class="img-responsive img-thumbnail" style="cursor: pointer"/>
+			</div>
+			<br/><br/><br/>
+			<div class="margin-top-5">
+				<div class="col-sm-6 col-xs-6">
+					<a class="btn btn-lg btn-rounded btn-success pull-right">{{ data.temp_data[0].name || 'Empty Answer 1' }}</a>
+				</div>
+				<div class="col-sm-6 col-xs-6">
+					<a class="btn btn-lg btn-rounded btn-danger pull-left">{{ data.temp_data[1].name || 'Empty Answer 2' }}</a>
 				</div>
 			</div>
 		</section>

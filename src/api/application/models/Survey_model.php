@@ -99,21 +99,21 @@ class Survey_model extends CI_Model
 			$data['id'] = 'NEW';
 			$data['user_id'] = $user_id;
 			$data['temp_data'] = json_encode($data['temp_data']);
-			$data['temp_name'] = $data['temp_name'] . ' - Clone';
+			$data['temp_name'] = $data['temp_name'] . ' - Cloned';
 			$file_key = mt_rand() . '_' . time();
-			$file_name = mt_rand() . '_' . time();
 			$file_key .= $this->_RandomString();
 			$file_key = base64_encode($file_key);
 			$data['key_url'] = $file_key;
 			$data['change_date'] = date("Y-m-d H:i:s");
 			if ($data['temp_file'] != '') {
+				$file_name = mt_rand() . '_' . time();
 				$target_path = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR . 'survey/';
 				$origin_file = $target_path . $data['temp_file'];
 				$to_file = $target_path . $file_name . '.png';
 				copy($origin_file, $to_file);
+				$data['temp_image'] = 'http://' . $_SERVER['SERVER_NAME'] . UPLOAD_DIR . 'survey/' . $file_name . '.png';
+				$data['temp_file'] = $file_name . '.png';
 			}
-			$data['temp_image'] = 'http://' . $_SERVER['SERVER_NAME'] . UPLOAD_DIR . 'survey/' . $file_name . '.png';
-			$data['temp_file'] = $file_name . '.png';
 			$this->db->insert($this->survey_data_table, $data);
 			return array('result' => 'success');
 		} else {
