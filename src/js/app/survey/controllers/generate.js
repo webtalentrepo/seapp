@@ -1,9 +1,9 @@
 'use strict';
 
 app_survey.controller('SelectGenerateController', [
-	'$rootScope', '$state', '$stateParams', '$scope', '$window', '$localStorage', 'surveyModelService', 'AUTH_EVENTS', 'commonService', 'toaster',
+	'$rootScope', '$state', '$stateParams', '$scope', '$localStorage', 'surveyModelService', 'AUTH_EVENTS', 'commonService', 'toaster',
 	'editableOptions', 'editableThemes', 'FileUploader', 'APP_SETTINGS',
-	function ($rootScope, $state, $stateParams, $scope, $window, $localStorage, surveyModelService, AUTH_EVENTS, commonService, toaster,
+	function ($rootScope, $state, $stateParams, $scope, $localStorage, surveyModelService, AUTH_EVENTS, commonService, toaster,
 	          editableOptions, editableThemes, FileUploader, APP_SETTINGS) {
 		var userInfo = $rootScope.$$childHead.userInfo = commonService.getUserInfo();
 		if (userInfo.login !== AUTH_EVENTS.LOGIN_SUCCESS) {
@@ -182,7 +182,7 @@ app_survey.controller('SelectGenerateController', [
 					that.key_url = re.id;
 					that.sectionId = re.section_id;
 					that.saveComplete = true;
-					var embedSrc = $window.location.origin + '/survey/' + that.temp_key;
+					var embedSrc = APP_SETTINGS.SURVEY_URL + that.temp_key;
 					that.embedLink = '<a href=""><iframe src="' + embedSrc + '" style="border: 0; width: 100%; height: 100%;"></iframe></a>';
 				} else {
 					toaster.pop('error', 'Error!', 'Failed on saving.');

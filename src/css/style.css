@@ -643,17 +643,28 @@ a.disabled {
 }
 
 .rate-icon {
-	padding: 0 2px;
 	cursor: pointer;
+	padding: 0 !important;
+	width: 48px;
+	height: 50px;
+	font-size: 40px;
+}
+
+.rate-icon:hover {
+	border: 1px dotted #ccc;
 }
 
 .selected-rate {
 	color: #e8d834;
 }
 
+.selected-rate:hover {
+	color: #deaf38 !important;
+}
+
 .fa-square.selected-rate {
-	width: 39px !important;
-	height: 40px !important;
+	width: 48px !important;
+	height: 50px !important;
 }
 
 .dashboard-panel {
@@ -700,4 +711,9 @@ a.disabled {
 
 .max-width-600 {
 	max-width: 600px !important;
+}
+
+.link-btn {
+	min-width: 200px;
+	display: inline-block;
 }

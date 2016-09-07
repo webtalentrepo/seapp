@@ -1,8 +1,8 @@
 'use strict';
 
 app_survey.controller('DashboardSurveyController', [
-	'$rootScope', '$state', '$scope', '$window', '$localStorage', 'surveyModelService', 'AUTH_EVENTS', 'commonService',
-	function ($rootScope, $state, $scope, $window, $localStorage, surveyModelService, AUTH_EVENTS, commonService) {
+	'$rootScope', '$state', '$scope', '$window', '$localStorage', 'surveyModelService', 'AUTH_EVENTS', 'commonService', 'APP_SETTINGS',
+	function ($rootScope, $state, $scope, $window, $localStorage, surveyModelService, AUTH_EVENTS, commonService, APP_SETTINGS) {
 		var userInfo = $rootScope.$$childHead.userInfo = commonService.getUserInfo();
 		if (userInfo.login !== AUTH_EVENTS.LOGIN_SUCCESS) {
 			commonService.setLoginFailed();
@@ -64,7 +64,7 @@ app_survey.controller('DashboardSurveyController', [
 		};
 		that.embedLink = '';
 		$scope.GetEmbedTemp = function (temp) {
-			var embedSrc = $window.location.origin + '/survey/' + temp.key_url;
+			var embedSrc = APP_SETTINGS.SURVEY_URL + temp.key_url;
 			that.embedLink = '<a href=""><iframe src="' + embedSrc + '" style="border: 0; width: 100%; height: 100%;"></iframe></a>';
 			$.fancybox({
 				href: "#embedTemp",

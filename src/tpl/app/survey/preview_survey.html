@@ -13,7 +13,7 @@
 			</div>
 			<br/>
 			<div class="margin-top-5 text-center" ng-repeat="tempBtn in data.temp_data">
-				<a class="btn-lg btn-info btn-link h4 margin-top-5" style="min-width: 200px;display: inline-block;">
+				<a class="btn-lg btn-info btn-link h4 margin-top-5 link-btn">
 					{{tempBtn.name || tempBtn.temp}}
 				</a>
 			</div>
@@ -33,7 +33,7 @@
 			<br/><br/>
 			<div class="margin-top-5">
 				<div class="inline" ng-repeat="tempItem in data.temp_data.rateTemp">
-					<i class="fa fa-3x rate-icon" ng-click="RateScore($index)" ng-class="RateIcon(tempItem)"></i>
+					<i class="btn btn-lg fa rate-icon" ng-click="RateScore($index)" ng-class="RateIcon(tempItem)"></i>
 				</div>
 			</div>
 			<br/>
