@@ -1,6 +1,6 @@
 <?php
 require_once '../survey_lib/config.php';
-//defined('TARGET_DIR') OR define('TARGET_URL', '/rate_score/');
+//defined('RATE_URL') OR define('RATE_URL', '/rate_score/');
 defined('RATE_URL') OR define('RATE_URL', '/theme_survey/angular/rate_score/');
 $requestUri = preg_replace(
 	'#^' . preg_quote($_SERVER['BASE'], '#') . '#', '', $_SERVER['REQUEST_URI']

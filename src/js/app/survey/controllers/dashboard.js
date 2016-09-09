@@ -65,7 +65,8 @@ app_survey.controller('DashboardSurveyController', [
 		that.embedLink = '';
 		$scope.GetEmbedTemp = function (temp) {
 			var embedSrc = APP_SETTINGS.SURVEY_URL + temp.key_url;
-			that.embedLink = '<a href=""><iframe src="' + embedSrc + '" style="border: 0; width: 100%; height: 100%;"></iframe></a>';
+			that.embedLink = '<a href="#" style="width: 100%; height: 100%; display: inline-block;">';
+			that.embedLink += '<iframe src="' + embedSrc + '" style="border: 0; width: 100%; height: 100%;"></iframe></a>';
 			$.fancybox({
 				href: "#embedTemp",
 				width: 400,

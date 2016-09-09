@@ -3,10 +3,10 @@
     angular.module('constants', [])
         .constant('APP_SETTINGS', {
             RESOURCE_DIR: '',
-            // API_ROOT_URL: 'http://surveysforemail.net/api/',
-            // SURVEY_URL: 'http://surveysforemail.net/survey/'
-	        API_ROOT_URL: 'http://localhost/theme_survey/src/api/',
-	        SURVEY_URL: 'http://localhost/theme_survey/angular/survey/'
+            API_ROOT_URL: 'http://surveysforemail.net/api/',
+            SURVEY_URL: 'http://surveysforemail.net/survey/'
+            // API_ROOT_URL: 'http://localhost/theme_survey/src/api/',
+            // SURVEY_URL: 'http://localhost/theme_survey/angular/survey/'
         })
         .constant('AUTH_EVENTS', {
             LOGIN_SUCCESS: '1',

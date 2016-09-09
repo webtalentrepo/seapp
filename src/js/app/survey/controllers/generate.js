@@ -183,7 +183,8 @@ app_survey.controller('SelectGenerateController', [
 					that.sectionId = re.section_id;
 					that.saveComplete = true;
 					var embedSrc = APP_SETTINGS.SURVEY_URL + that.temp_key;
-					that.embedLink = '<a href=""><iframe src="' + embedSrc + '" style="border: 0; width: 100%; height: 100%;"></iframe></a>';
+					that.embedLink = '<a href="#" style="width: 100%; height: 100%; display: inline-block;">';
+					that.embedLink += '<iframe src="' + embedSrc + '" style="border: 0; width: 100%; height: 100%;"></iframe></a>';
 				} else {
 					toaster.pop('error', 'Error!', 'Failed on saving.');
 				}
@@ -225,6 +226,7 @@ app_survey.controller('SelectGenerateController', [
 				return 'fa-' + that.RateType + '-o';
 			}
 		}
+		
 		$scope.removeRate = function () {
 			that.TempRate.splice((that.TempRate.length - 1), 1);
 		};

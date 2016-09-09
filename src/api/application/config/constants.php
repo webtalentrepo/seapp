@@ -85,8 +85,4 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 defined('UPLOAD_DIR') OR define('UPLOAD_DIR', '/theme_survey/src/api/uploads/');
-defined('MEDIA_DIR') OR define('MEDIA_DIR', '/theme_survey/src/api/medias/');
-defined('JSON_DIR') OR define('JSON_DIR', '/theme_survey/src/api/json/');
 //defined('UPLOAD_DIR') OR define('UPLOAD_DIR', '/api/uploads/');
-//defined('MEDIA_DIR') OR define('MEDIA_DIR', '/api/medias/');
-//defined('JSON_DIR') OR define('JSON_DIR', '/api/json/');
