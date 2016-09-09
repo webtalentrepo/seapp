@@ -59,9 +59,7 @@ app_survey.controller('DashboardSurveyController', [
 			$localStorage.SE_tempType = temp.section_id;
 			$state.go('app.survey.generate', {key_url: temp.id});
 		};
-		$scope.ReportTemp = function (temp) {
-			
-		};
+		
 		that.embedLink = '';
 		$scope.GetEmbedTemp = function (temp) {
 			var embedSrc = APP_SETTINGS.SURVEY_URL + temp.key_url;
@@ -106,6 +104,28 @@ app_survey.controller('DashboardSurveyController', [
 					getTempList();
 				}
 			});
-		}
+		};
+		
+		$scope.reportData = [];
+		$scope.totalClicks = 0;
+		$scope.ReportTemp = function (temp) {
+			$scope.reportData = [];
+			var param = {
+				id: temp.id
+			};
+			surveyModelService.GetReportData(param).then(function (response) {
+				var re = angular.fromJson(response);
+				if (re.result === 'success') {
+					$scope.reportData = re.data;
+					$scope.totalClicks = re.totalClicks * 1;
+					$.fancybox({
+						href: "#clickReport",
+						width: 600,
+						autoSize: false,
+						scrolling: "auto"
+					});
+				}
+			});
+		};
 	}]
 );

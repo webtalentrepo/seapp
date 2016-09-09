@@ -31,6 +31,11 @@ app_survey.factory('surveyModelService', ['surveyRestService', function (surveyR
 			return surveyRestService.cloneSurveyData().query(param).$promise.then(function (response) {
 				return response;
 			});
+		},
+		GetReportData: function (param) {
+			return surveyRestService.getReportData().query(param).$promise.then(function (response) {
+				return response;
+			});
 		}
 	};
 }]);

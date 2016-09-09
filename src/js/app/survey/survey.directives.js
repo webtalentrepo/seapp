@@ -195,4 +195,62 @@ app_survey
 				};
 			}
 		};
-	}]);
+	}])
+	.directive('hcPieChart', function () {
+		return {
+			restrict: 'E',
+			template: '<div></div>',
+			scope: {
+				title: '@',
+				data: '='
+			},
+			link: function (scope, el) {
+				var chart = new Highcharts.chart(el[0], {
+					chart: {
+						type: 'pie',
+						width: 500,
+						height: 300
+					},
+					title: {
+						text: scope.title
+					},
+					tooltip: {
+						pointFormat: '<strong>{point.name}: {point.y}({point.percentage:.1f}%)</strong>'
+					},
+					credits: {
+						enabled: false
+					},
+					legend: {
+						align: 'right',
+						maxHeight: 200,
+						layout: 'vertical',
+						verticalAlign: "top",
+						labelFormat: '<strong>{percentage:.1f}%: {name}</strong>'
+					},
+					plotOptions: {
+						pie: {
+							allowPointSelect: true,
+							cursor: 'pointer',
+							dataLabels: {
+								enabled: true,
+								distance: -40,
+								format: '{point.percentage:.1f}%'
+							}
+						}
+					},
+					series: [{
+						type: 'pie',
+						data: scope.data,
+						showInLegend: true
+					}]
+				});
+				scope.$watch(function () {
+					return scope.data;
+				}, function (newValue, oldValue) {
+					if (newValue != oldValue) {
+						chart.series[0].setData(newValue, true);
+					}
+				}, true);
+			}
+		};
+	});

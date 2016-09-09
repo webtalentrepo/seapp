@@ -89,4 +89,11 @@ class Survey extends App_Controller
 		exit($this->sendJsonResponse($result));
 	}
 	
+	public function getreport()
+	{
+		$id = $this->getRequestPayloadParameter('id');
+		$result = $this->s_m->getReport($id);
+		exit($this->sendJsonResponse($result));
+	}
+	
 }

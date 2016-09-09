@@ -108,6 +108,26 @@
 		</div>
 	</div>
 </div>
+<div id="clickReport" class="popin container-fluid">
+	<div class="panel panel-default">
+		<div class="panel-body text-center">
+			<div class="h3 text-bold text-center">
+				Reporting
+			</div>
+			<div class="margin-top-5 row h4">
+				<div class="col-sm-4 text-bold"><span class="pull-right">Total Views</span></div>
+				<div class="col-sm-8"><span class="pull-left"><span class="text-bold">{{ totalClicks }}</span> of views</span></div>
+			</div>
+			<div class="margin-top-5 row" ng-if="reportData.length > 0" ng-repeat="report in reportData">
+				<div class="col-sm-4 text-bold"><span class="pull-right">{{ report.name }}</span></div>
+				<div class="col-sm-8"><span class="pull-left"><span class="text-bold">{{ report.y }}</span> of clicks displayed</span></div>
+			</div>
+			<div class="margin-top-5">
+				<hc-pie-chart data="reportData"></hc-pie-chart>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="ajax_loading text-center" ng-if="isLoading">
 	<img src="img/loading.gif"/>
 </div>

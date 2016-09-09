@@ -10,11 +10,13 @@ class Survey_model extends CI_Model
 {
 	
 	private $survey_data_table;
+	private $survey_click_table;
 	
 	public function __construct()
 	{
 		parent::__construct();
 		$this->survey_data_table = 'survey_data_table';
+		$this->survey_click_table = 'survey_click_table';
 	}
 	
 	public function saveData($data)
@@ -134,5 +136,46 @@ class Survey_model extends CI_Model
 	private function _RandomString()
 	{
 		return bin2hex(openssl_random_pseudo_bytes(8));
+	}
+	
+	public function getReport($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get($this->survey_data_table);
+		$data = array();
+		$totalClicks = 0;
+		if ($query->num_rows() && $query->num_rows() > 0) {
+			$row = $query->row_array();
+			$temp_data = json_decode($row['temp_data'], true);
+			if ($row['section_id'] == 2) {
+				$temp_data = $temp_data['rateTemp'];
+			}
+			$key = 0;
+			foreach ($temp_data as $rr) {
+				if ($row['section_id'] == 2) {
+					$name = $rr['value'];
+				} else {
+					$name = $rr['name'];
+				}
+				$data[$key] = array();
+				$data[$key]['name'] = ($row['section_id'] == 2) ? ('Rate ' . $name) : $name;
+				$qry = $this->db
+					->where('key_url', $row['key_url'])
+					->where('survey_score', $name)
+					->get($this->survey_click_table);
+				if ($qry->num_rows() && $qry->num_rows() > 0) {
+					$data[$key]['y'] = $qry->num_rows() * 1;
+				} else {
+					$data[$key]['y'] = 0;
+				}
+				$totalClicks += $data[$key]['y'] * 1;
+				$key ++;
+			}
+		}
+		return array(
+			'result' => 'success',
+			'data' => $data,
+			'totalClicks' => $totalClicks
+		);
 	}
 }

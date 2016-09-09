@@ -55,7 +55,10 @@ angular.module('app')
 						templateUrl: 'tpl/app/survey/dashboard.html',
 						controller: 'DashboardSurveyController',
 						controllerAs: 'surveydash',
-						resolve: load(['js/app/survey/controllers/dashboard.js'], function () {
+						resolve: load([
+							'highchart',
+							'js/app/survey/controllers/dashboard.js'
+						], function () {
 							window.localStorage.CURR_SRC = "app.survey.dashboard";
 							return true;
 						})

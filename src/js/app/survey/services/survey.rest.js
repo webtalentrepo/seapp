@@ -51,6 +51,14 @@ app_survey.factory('surveyRestService', [
 						isArray: false
 					}
 				});
+			},
+			getReportData: function () {
+				return $resource(APP_SETTINGS.API_ROOT_URL + 'survey/getreport', {}, {
+					query: {
+						method: 'POST',
+						isArray: false
+					}
+				});
 			}
 		};
 	}
