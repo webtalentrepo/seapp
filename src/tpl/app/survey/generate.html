@@ -5,13 +5,9 @@
 		<div class="bg-light lter b-b wrapper-sm">
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-					<em class="m-n font-thin h4 text-bold text-primary-dker">
-						{{ surveygen.HeaderTitle }}
-						<em editable-text="surveygen.TempName" e-style="width: 300px;"
-						    onbeforesave="checkTempEmpty($data)">
-							{{ surveygen.TempName || 'Empty' }}
-						</em>&nbsp;and Preview.
-					</em>
+					<span class="m-n font-thin h4 text-bold text-primary-dker">
+						{{ surveygen.HeaderTitle || 'Empty' }} and Preview.
+					</span>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 					<a ui-sref="app.survey.dashboard" class="btn btn-primary pull-right">
@@ -33,12 +29,12 @@
 						Any
 						<span class="editable-click text-primary">underlined</span>
 						element below and button elements is editable to your liking.
-						<div>
+						<div class="margin-top-5 h4 text-bold">
 							Subject:
-							<em editable-text="surveygen.TempName" e-style="width: 300px;"
+							<span editable-text="surveygen.TempName" e-style="width: 300px;"
 							    onbeforesave="checkTempEmpty($data)">
 								{{ surveygen.TempName || 'Empty' }}
-							</em>
+							</span>
 						</div>
 					</div>
 					<div class="panel-body text-center">
@@ -46,10 +42,10 @@
 							<temp-header data="surveygen" placeholder="MAIN HEADLINE CAN GO HERE"></temp-header>
 							<br/>
 							<div class="h4 margin-top-5">
-								<em editable-textarea="surveygen.TempHeader1" e-rows="5" e-cols="40" e-style="font-size: 14px;"
+								<span editable-textarea="surveygen.TempHeader1" e-rows="5" e-cols="40" e-style="font-size: 14px;"
 								    e-placeholder="e.g. Tell us what you want to learn about?">
 									{{ surveygen.TempHeader1 || 'Enter your headline here' }}
-								</em>
+								</span>
 							</div>
 							<br/>
 							<div class="margin-top-5" ng-repeat="tempButton in surveygen.TempButton">
@@ -71,10 +67,10 @@
 							<temp-header data="surveygen" placeholder="Your Products, Services, Programs..."></temp-header>
 							<br/>
 							<div class="h4 margin-top-5">
-								<em editable-textarea="surveygen.TempHeader1" e-rows="5" e-cols="40" e-style="font-size: 14px;"
+								<span editable-textarea="surveygen.TempHeader1" e-rows="5" e-cols="40" e-style="font-size: 14px;"
 								    e-placeholder="e.g. How Would You Rate Us?">
 									{{ surveygen.TempHeader1 || 'Your Questions?' }}
-								</em>
+								</span>
 							</div>
 							<br/>
 							<div class="margin-top-5">
@@ -103,15 +99,15 @@
 							<div class="margin-top-5 row text-center">
 								<div class="col-sm-6 padding-right-none">
 									<label>1 {{ surveygen.RateType }}=</label>
-									<em editable-text="surveygen.RateLabel.left" e-placeholder="e.g. Not at all likely">
+									<span editable-text="surveygen.RateLabel.left" e-placeholder="e.g. Not at all likely">
 										{{ surveygen.RateLabel.left || 'very unlikely' }}
-									</em>
+									</span>
 								</div>
 								<div class="col-sm-6 padding-left-none">
 									<label>{{ surveygen.TempRate.length + ' ' + surveygen.RateType }}=</label>
-									<em editable-text="surveygen.RateLabel.right" e-placeholder="e.g. Extremely likely">
+									<span editable-text="surveygen.RateLabel.right" e-placeholder="e.g. Extremely likely">
 										{{ surveygen.RateLabel.right || 'very likely' }}
-									</em>
+									</span>
 								</div>
 							</div>
 							<div class="margin-top-5 row text-center">
@@ -157,34 +153,57 @@
 								<i class="glyphicon glyphicon-remove"></i> Cancel
 							</a>
 							<button ng-click="nextStep()" class="btn btn-default pull-right">
-								Save <i class="glyphicon glyphicon-arrow-right"></i>
+								Next <i class="glyphicon glyphicon-arrow-right"></i>
 							</button>
 						</div>
 					</div>
 				</div>
 				<div class="panel panel-default" ng-if="surveygen.saveComplete">
-					<div class="panel-body text-center">
-						<div class="h3 text-bold text-center">
-							Your Survey is Ready!
+					<div class="panel-heading font-bold">
+						Any
+						<span class="editable-click text-primary">underlined</span>
+						element below and button elements is editable to your liking.
+						<div class="margin-top-5 h4 text-bold">
+							Subject: {{ surveygen.TempName || 'Empty' }}
 						</div>
-						<div class="h4 text-center margin-top-5">
-							Embed Link For Email
-						</div>
-						<div class="margin-top-5">
-							<textarea id="embedLink" ng-click="clickText()" class="form-control" style="width: 100%;resize: none;" rows="5"
-							          ng-model="surveygen.embedLink"></textarea>
+					</div>
+					<div class="panel-body">
+						<div class="margin-top-5 text-center">
+							<span class="h3 text-bold">Where Do You Want To Direct Each Answer?</span>
 						</div>
 						<br/>
+						<div class="col-lg-10 col-lg-offset-1" ng-if="surveygen.sectionId == 1">
+							<div class="margin-top-5 h4 text-primary-dker" ng-repeat="tempButton in surveygen.TempButton">
+								<span editable-url="tempButton.link" e-style="width: 300px;font-size: 16px;" style="min-width: 200px;"
+								    e-placeholder="e.g. http://example.com" e-required e-pattern="https?://.+">
+									{{ tempButton.link || 'ENTER LINK FOR *' + tempButton.name  + '*' }}
+								</span><br/><br/>
+							</div>
+						</div>
+						<div class="col-lg-10 col-lg-offset-1" ng-if="surveygen.sectionId == 2">
+							<div class="margin-top-5 h4 text-primary-dker" ng-repeat="rateTemp in surveygen.TempRate">
+								<span editable-url="rateTemp.link" e-style="width: 300px;font-size: 16px;" style="min-width: 200px;"
+								      e-placeholder="e.g. http://example.com" e-required e-pattern="https?://.+">
+									{{ rateTemp.link || 'ENTER LINK FOR *' + surveygen.RateType + ' ' + rateTemp.name + '*' }}
+								</span><br/><br/>
+							</div>
+						</div>
+						<div class="col-lg-10 col-lg-offset-1" ng-if="surveygen.sectionId == 3">
+							<div class="margin-top-5 h4 text-primary-dker" ng-repeat="Answer in surveygen.answerButton">
+								<span editable-url="Answer.link" e-style="width: 300px;font-size: 16px;" style="min-width: 200px;"
+								      e-placeholder="e.g. http://example.com" e-required e-pattern="https?://.+">
+									{{ Answer.link || 'ENTER LINK FOR *' + Answer.name + '*' }}
+								</span><br/><br/>
+							</div>
+						</div>
+						<br/><br/><br/><br/>
 						<div class="margin-top-5">
-							<a ng-click="editSurvey()" class="btn btn-default pull-left">
+							<button class="btn btn-default pull-left" ng-click="editSurvey()">
 								<i class="glyphicon glyphicon-arrow-left"></i> Edit Survey
-							</a>
-							<button ng-click="previewSurvey()" class="btn btn-default pull-none">
-								<i class="glyphicon glyphicon-eye-open"></i> View Survey
 							</button>
-							<a ui-sref="app.survey.select" class="btn btn-default pull-right">
-								Create Survey <i class="glyphicon glyphicon-arrow-right"></i>
-							</a>
+							<button class="btn btn-default pull-right" ng-click="finishEdit()">
+								Finish <i class="glyphicon glyphicon-arrow-right"></i>
+							</button>
 						</div>
 					</div>
 				</div>

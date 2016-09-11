@@ -45,7 +45,7 @@ angular.module('app')
 						url: '/apps',
 						templateUrl: 'tpl/layout.html'
 					})
-					// Video To Gif
+					// Survey For Emails
 					.state('app.survey', {
 						url: '/survey',
 						template: '<div ui-view class="fade-in-down"></div>'

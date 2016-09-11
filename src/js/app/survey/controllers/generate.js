@@ -26,7 +26,7 @@ app_survey.controller('SelectGenerateController', [
 		that.sectionId = 1;
 		that.SE_Type = $localStorage.SE_tempType;
 		if ($localStorage.SE_tempType === 'NEW') {
-			that.HeaderTitle = 'Create ';
+			that.HeaderTitle = 'Create ' + that.TempName;
 			that.sectionId = that.key_url * 1;
 			that.ImageAddAble = true;
 			/**
@@ -34,14 +34,14 @@ app_survey.controller('SelectGenerateController', [
 			 */
 			that.TempButton = [];
 			for (var i = 0; i < 3; i++) {
-				that.TempButton[i] = {temp: ('Enter Info For Box #' + (i + 1)), name: ''};
+				that.TempButton[i] = {temp: ('Enter Info For Box #' + (i + 1)), name: '', link: ''};
 			}
 			/**
 			 * Section 2
 			 */
 			that.TempRate = [];
 			for (var j = 0; j < 5; j++) {
-				that.TempRate[j] = {value: (j + 1), selected: false};
+				that.TempRate[j] = {name: (j + 1), selected: false, link: ''};
 			}
 			that.RateType = 'star';
 			that.RateLabel = {};
@@ -54,8 +54,8 @@ app_survey.controller('SelectGenerateController', [
 			 * Section 3
 			 */
 			that.answerButton = [];
-			that.answerButton[0] = {temp: 'YES', name: ''};
-			that.answerButton[1] = {temp: 'NO', name: ''};
+			that.answerButton[0] = {temp: 'YES', name: '', link: ''};
+			that.answerButton[1] = {temp: 'NO', name: '', link: ''};
 		} else {
 			that.HeaderTitle = 'Edit ';
 			that.sectionId = $localStorage.SE_tempType * 1;
@@ -148,6 +148,35 @@ app_survey.controller('SelectGenerateController', [
 					}
 				}
 			}
+			that.saveComplete = true;
+		};
+		
+		$scope.finishEdit = function () {
+			if ((that.sectionId * 1) === 1) {
+				for (var i = 0; i < that.TempButton.length; i++) {
+					if (that.TempButton[i].link === '' || that.TempButton[i].link === null || that.TempButton[i].link === undefined) {
+						var buttonError = 'Please insert a link for "' + that.TempButton[i].name + '"';
+						toaster.pop('error', 'Error!', buttonError);
+						return false;
+					}
+				}
+			} else if ((that.sectionId * 1) === 2) {
+				for (var j = 0; j < that.TempRate.length; j++) {
+					if (that.TempRate[j].link === '' || that.TempRate[j].link === null || that.TempRate[j].link === undefined) {
+						var RateButtonError = 'Please insert a link for "' + that.RateType + ' ' + that.TempRate[j].name + '"';
+						toaster.pop('error', 'Error!', RateButtonError);
+						return false;
+					}
+				}
+			} else if ((that.sectionId * 1) === 3) {
+				for (var k = 0; k < that.answerButton.length; k++) {
+					if (that.answerButton[k].link === '' || that.answerButton[k].link === null || that.answerButton[k].link === undefined) {
+						var Error = 'Please insert a link for "' + that.answerButton[k].name + '"';
+						toaster.pop('error', 'Error!', Error);
+						return false;
+					}
+				}
+			}
 			var params = {
 				user_id: userInfo.user_id,
 				section_id: that.sectionId,
@@ -161,43 +190,31 @@ app_survey.controller('SelectGenerateController', [
 			if ((that.sectionId * 1) === 1) {
 				params.temp_data = that.TempButton
 			} else if ((that.sectionId * 1) === 2) {
-				var RateData = {
+				params.temp_data = {
 					rateTemp: that.TempRate,
 					rateType: that.RateType,
 					rateLabel: that.RateLabel,
 					rateOptions: that.RateOptions
 				};
-				params.temp_data = RateData;
 			} else if ((that.sectionId * 1) === 3) {
 				params.temp_data = that.answerButton;
 			}
 			params.id = ($localStorage.SE_tempType === 'NEW') ? 'NEW' : that.key_url;
-			that.saveComplete = false;
 			that.isLoading = true;
 			surveyModelService.SaveSurveyData(params).then(function (response) {
 				var re = angular.fromJson(response);
 				that.isLoading = false;
 				if (re.result === 'success') {
-					that.temp_key = re.file_key;
-					that.key_url = re.id;
-					that.sectionId = re.section_id;
 					that.saveComplete = true;
-					var embedSrc = APP_SETTINGS.SURVEY_URL + that.temp_key;
-					that.embedLink = '<a href="#" style="width: 100%; height: 100%; display: inline-block;">';
-					that.embedLink += '<iframe src="' + embedSrc + '" style="border: 0; width: 100%; height: 100%;"></iframe></a>';
+					$state.go('app.survey.dashboard');
 				} else {
 					toaster.pop('error', 'Error!', 'Failed on saving.');
 				}
 			});
 		};
 		
-		$scope.clickText = function () {
-			$("#embedLink").focus().select();
-		};
-		
 		$scope.editSurvey = function () {
 			that.saveComplete = false;
-			$localStorage.SE_tempType = that.sectionId;
 			that.HeaderTitle = 'Edit ' + that.TempName;
 		};
 		
@@ -205,7 +222,7 @@ app_survey.controller('SelectGenerateController', [
 		 * Section 1.
 		 */
 		$scope.addBoxes = function () {
-			var addInfo = {temp: ('Enter Info For Box #' + (that.TempButton.length + 1)), name: ''};
+			var addInfo = {temp: ('Enter Info For Box #' + (that.TempButton.length + 1)), name: '', link: ''};
 			that.TempButton.push(addInfo);
 		};
 		
@@ -231,7 +248,7 @@ app_survey.controller('SelectGenerateController', [
 			that.TempRate.splice((that.TempRate.length - 1), 1);
 		};
 		$scope.addRate = function () {
-			var addInfo = {value: (that.TempRate.length + 1), selected: false};
+			var addInfo = {name: (that.TempRate.length + 1), selected: false, link: ''};
 			that.TempRate.push(addInfo);
 		};
 		

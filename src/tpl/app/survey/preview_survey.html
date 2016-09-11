@@ -13,7 +13,7 @@
 			</div>
 			<br/>
 			<div class="margin-top-5 text-center" ng-repeat="tempBtn in data.temp_data">
-				<a class="btn-lg btn-info btn-link h4 margin-top-5 link-btn">
+				<a href="{{ tempBtn.link }}" target="_blank" class="btn-lg btn-info btn-link h4 margin-top-5 link-btn">
 					{{tempBtn.name || tempBtn.temp}}
 				</a>
 			</div>
@@ -33,7 +33,9 @@
 			<br/><br/>
 			<div class="margin-top-5">
 				<div class="inline" ng-repeat="tempItem in data.temp_data.rateTemp">
-					<i class="btn btn-lg fa rate-icon" ng-click="RateScore($index)" ng-class="RateIcon(tempItem)"></i>
+					<a href="{{ tempItem.link }}" target="_blank">
+						<i class="btn btn-lg fa rate-icon" ng-click="RateScore($index)" ng-class="RateIcon(tempItem)"></i>
+					</a>
 				</div>
 			</div>
 			<br/>
@@ -57,10 +59,14 @@
 			<br/><br/><br/>
 			<div class="margin-top-5">
 				<div class="col-sm-6 col-xs-6">
-					<a class="btn btn-lg btn-rounded btn-success pull-right">{{ data.temp_data[0].name || 'Empty Answer 1' }}</a>
+					<a href="{{ data.temp_data[0].link }}" target="_blank" class="btn btn-lg btn-rounded btn-success pull-right">
+						{{ data.temp_data[0].name || 'Empty Answer 1' }}
+					</a>
 				</div>
 				<div class="col-sm-6 col-xs-6">
-					<a class="btn btn-lg btn-rounded btn-danger pull-left">{{ data.temp_data[1].name || 'Empty Answer 2' }}</a>
+					<a href="{{ data.temp_data[1].link }}" target="_blank" class="btn btn-lg btn-rounded btn-danger pull-left">
+						{{ data.temp_data[1].name || 'Empty Answer 2' }}
+					</a>
 				</div>
 			</div>
 		</section>

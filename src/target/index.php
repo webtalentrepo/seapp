@@ -1,7 +1,7 @@
 <?php
 require_once '../survey_lib/config.php';
 //defined('RATE_URL') OR define('RATE_URL', '/rate_score/');
-defined('RATE_URL') OR define('RATE_URL', '/theme_survey/angular/rate_score/');
+//defined('RATE_URL') OR define('RATE_URL', '/theme_survey/angular/rate_score/');
 $requestUri = preg_replace(
 	'#^' . preg_quote($_SERVER['BASE'], '#') . '#', '', $_SERVER['REQUEST_URI']
 );
@@ -15,8 +15,9 @@ if ($param) {
 	$ins_sql .= " VALUES ('" . $paramAry[0] . "', '" . $paramAry[1] . "', '" . $paramAry[2] . "', '" . $_SERVER['REMOTE_ADDR'] . "', '" . date("Y-m-d H:i:s") . "')";
 	$db->query($ins_sql);
 	$id = $db->insert_id;
-	$param_str = $paramAry[0] . '_COL_' . $id;
-	$param_str = base64_encode($param_str);
-	$target_path = "http://" . $_SERVER["SERVER_NAME"] . RATE_URL . $param_str;
+//	$param_str = $paramAry[0] . '_COL_' . $id;
+//	$param_str = base64_encode($param_str);
+//	$target_path = "http://" . $_SERVER["SERVER_NAME"] . RATE_URL . $param_str;
+	$target_path = $paramAry[3];
 	header('location:' . $target_path);
 }

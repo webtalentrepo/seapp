@@ -29,8 +29,6 @@ class Survey_model extends CI_Model
 			$data['key_url'] = $file_key;
 			$data['change_date'] = date("Y-m-d H:i:s");
 			$this->db->insert($this->survey_data_table, $data);
-			$id = $this->db->insert_id();
-			$return_key = $file_key;
 		} else {
 			$data['change_date'] = date("Y-m-d H:i:s");
 			if ($data['key_url'] == '') {
@@ -39,16 +37,11 @@ class Survey_model extends CI_Model
 				$file_key = base64_encode($file_key);
 				$data['key_url'] = $file_key;
 			}
-			$return_key = $data['key_url'];
 			$this->db->where('id', $data['id']);
 			$this->db->update($this->survey_data_table, $data);
-			$id = $data['id'];
 		}
 		return array(
-			'result' => 'success',
-			'id' => $id,
-			'file_key' => $return_key,
-			'section_id' => $data['section_id']
+			'result' => 'success'
 		);
 	}
 	
@@ -148,20 +141,17 @@ class Survey_model extends CI_Model
 			$row = $query->row_array();
 			$temp_data = json_decode($row['temp_data'], true);
 			if ($row['section_id'] == 2) {
+				$rateType = $temp_data['rateType'];
 				$temp_data = $temp_data['rateTemp'];
 			}
 			$key = 0;
 			foreach ($temp_data as $rr) {
-				if ($row['section_id'] == 2) {
-					$name = $rr['value'];
-				} else {
-					$name = $rr['name'];
-				}
 				$data[$key] = array();
-				$data[$key]['name'] = ($row['section_id'] == 2) ? ('Rate ' . $name) : $name;
+				$data[$key]['name'] = ($row['section_id'] == 2) ? ($rateType . ' ' . $rr['name']) : $rr['name'];
+				$data[$key]['link'] = $rr['link'];
 				$qry = $this->db
 					->where('key_url', $row['key_url'])
-					->where('survey_score', $name)
+					->where('survey_score', $rr['name'])
 					->get($this->survey_click_table);
 				if ($qry->num_rows() && $qry->num_rows() > 0) {
 					$data[$key]['y'] = $qry->num_rows() * 1;

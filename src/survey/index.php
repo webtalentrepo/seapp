@@ -59,7 +59,7 @@ if ($key_url) {
 				if ($row["section_id"] == 1) {
 					$key = 0;
 					foreach ($row["temp_data"] as $rr) {
-						$href_flag = $row["key_url"] . '_COL_' . $rr["name"] . '_COL_' . $key;
+						$href_flag = $row["key_url"] . '_COL_' . $rr["name"] . '_COL_' . $key . '_COL_' . $rr["link"];
 						$param = base64_encode($href_flag);
 						$href_url = $target_path . $param;
 						echo '<div class="margin-top-5 text-center">';
@@ -74,7 +74,7 @@ if ($key_url) {
 					echo '<br/><div class="margin-top-5">';
 					$key = 0;
 					foreach ($row["temp_data"]["rateTemp"] as $rr) {
-						$href_flag = $row["key_url"] . '_COL_' . $rr["value"] . '_COL_' . $key;
+						$href_flag = $row["key_url"] . '_COL_' . $rr["name"] . '_COL_' . $key . '_COL_' . $rr["link"];
 						$param = base64_encode($href_flag);
 						$href_url = $target_path . $param;
 						echo '<div class="inline">';
@@ -92,7 +92,7 @@ if ($key_url) {
 				} else if ($row["section_id"] == 3) {
 					echo '<br/><br/><div class="margin-top-5">';
 					echo '<div class="col-sm-6 col-xs-6">';
-					$href_flag = $row["key_url"] . '_COL_' . $row["temp_data"][0]["name"] . '_COL_0';
+					$href_flag = $row["key_url"] . '_COL_' . $row["temp_data"][0]["name"] . '_COL_0' . '_COL_' . $row["temp_data"][0]["link"];
 					$param = base64_encode($href_flag);
 					$href_url = $target_path . $param;
 					echo '<a href="' . $href_url . '" target="_blank" class="btn btn-lg btn-rounded btn-success pull-right">';
@@ -100,7 +100,7 @@ if ($key_url) {
 					echo '</a>';
 					echo '</div>';
 					echo '<div class="col-sm-6 col-xs-6">';
-					$href_flag = $row["key_url"] . '_COL_' . $row["temp_data"][1]["name"] . '_COL_1';
+					$href_flag = $row["key_url"] . '_COL_' . $row["temp_data"][1]["name"] . '_COL_1' . '_COL_' . $row["temp_data"][1]["link"];;
 					$param = base64_encode($href_flag);
 					$href_url = $target_path . $param;
 					echo '<a href="' . $href_url . '" target="_blank" class="btn btn-lg btn-rounded btn-danger pull-left">';
