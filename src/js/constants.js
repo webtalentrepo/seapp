@@ -4,9 +4,11 @@
         .constant('APP_SETTINGS', {
             RESOURCE_DIR: '',
             API_ROOT_URL: 'https://surveysforemail.net/api/',
-            SURVEY_URL: 'https://surveysforemail.net/survey/'
+            SURVEY_URL: 'https://surveysforemail.net/survey/',
+            TARGET_URL: 'https://surveysforemail.net/target/'
             // API_ROOT_URL: 'http://localhost/theme_survey/src/api/',
-            // SURVEY_URL: 'http://localhost/theme_survey/angular/survey/'
+            // SURVEY_URL: 'http://localhost/theme_survey/angular/survey/',
+            // TARGET_URL: 'http://localhost/theme_survey/angular/target/'
         })
         .constant('AUTH_EVENTS', {
             LOGIN_SUCCESS: '1',

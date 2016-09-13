@@ -97,13 +97,27 @@
 <div id="embedTemp" class="popin container-fluid">
 	<div class="panel panel-default">
 		<div class="panel-body text-center">
-			<div class="h3 text-bold text-center">
-				Embed Link For Email
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="h3 text-bold text-center margin-top-5">
+						Embed Link For Email
+					</div>
+					<div>
+						<input type="text" id="embedLink" ng-click="clickText('embedLink')" class="form-control"
+						       style="width: 95%;" ng-model="surveydash.embedLink"/>
+					</div>
+				</div>
 			</div>
-			<br/>
-			<div>
-				<textarea id="embedLink" ng-click="clickText()" class="form-control" style="width: 100%;resize: none;" rows="5"
-				          ng-model="surveydash.embedLink"></textarea>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="h3 text-bold text-center margin-top-5">
+						Embed Code For Email
+					</div>
+					<div>
+						<textarea class="form-control" id="embedCode" style="width: 100%;" ng-model="surveydash.embedCode"
+						          ng-click="clickText('embedCode')" rows="20"></textarea>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

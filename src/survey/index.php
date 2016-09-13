@@ -63,7 +63,7 @@ if ($key_url) {
 						$param = base64_encode($href_flag);
 						$href_url = $target_path . $param;
 						echo '<div class="margin-top-5 text-center">';
-						echo '<a href="' . $href_url . '" target="_blank" class="btn btn-lg btn-info btn-link h4 margin-top-5 link-btn">';
+						echo '<a href="' . $href_url . '" class="btn btn-lg btn-info btn-link h4 margin-top-5 link-btn">';
 						echo $rr['name'];
 						echo '</a>';
 						echo '</div>';
@@ -79,7 +79,7 @@ if ($key_url) {
 						$href_url = $target_path . $param;
 						echo '<div class="inline">';
 						$className = "fa rate-icon " . "fa-" . $row["temp_data"]["rateType"] . "-o";
-						echo '<a href="' . $href_url . '" target="_blank" onclick="clickRate(\'' . $key . '\')"><i class="' . $className . ' btn btn-lg"></i></a>';
+						echo '<a href="' . $href_url . '" onclick="clickRate(\'' . $key . '\')"><i class="' . $className . ' btn btn-lg"></i></a>';
 						echo '</div>';
 						$key++;
 					}
@@ -95,7 +95,7 @@ if ($key_url) {
 					$href_flag = $row["key_url"] . '_COL_' . $row["temp_data"][0]["name"] . '_COL_0' . '_COL_' . $row["temp_data"][0]["link"];
 					$param = base64_encode($href_flag);
 					$href_url = $target_path . $param;
-					echo '<a href="' . $href_url . '" target="_blank" class="btn btn-lg btn-rounded btn-success pull-right">';
+					echo '<a href="' . $href_url . '" class="btn btn-lg btn-rounded btn-success pull-right">';
 					echo $row["temp_data"][0]["name"];
 					echo '</a>';
 					echo '</div>';
@@ -103,7 +103,7 @@ if ($key_url) {
 					$href_flag = $row["key_url"] . '_COL_' . $row["temp_data"][1]["name"] . '_COL_1' . '_COL_' . $row["temp_data"][1]["link"];;
 					$param = base64_encode($href_flag);
 					$href_url = $target_path . $param;
-					echo '<a href="' . $href_url . '" target="_blank" class="btn btn-lg btn-rounded btn-danger pull-left">';
+					echo '<a href="' . $href_url . '" class="btn btn-lg btn-rounded btn-danger pull-left">';
 					echo $row["temp_data"][1]["name"];
 					echo '</a>';
 					echo '</div>';
