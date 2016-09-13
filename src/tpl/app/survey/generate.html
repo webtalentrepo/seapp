@@ -175,7 +175,7 @@
 						<div class="col-lg-10 col-lg-offset-1" ng-if="surveygen.sectionId == 1">
 							<div class="margin-top-5 h4 text-primary-dker" ng-repeat="tempButton in surveygen.TempButton">
 								<span editable-url="tempButton.link" e-style="width: 300px;font-size: 16px;" style="min-width: 200px;"
-								    e-placeholder="e.g. http://example.com" e-required e-pattern="https?://.+">
+								    e-placeholder="e.g. https://example.com" e-required e-pattern="https?://.+">
 									{{ tempButton.link || 'ENTER LINK FOR *' + tempButton.name  + '*' }}
 								</span><br/><br/>
 							</div>
@@ -183,7 +183,7 @@
 						<div class="col-lg-10 col-lg-offset-1" ng-if="surveygen.sectionId == 2">
 							<div class="margin-top-5 h4 text-primary-dker" ng-repeat="rateTemp in surveygen.TempRate">
 								<span editable-url="rateTemp.link" e-style="width: 300px;font-size: 16px;" style="min-width: 200px;"
-								      e-placeholder="e.g. http://example.com" e-required e-pattern="https?://.+">
+								      e-placeholder="e.g. https://example.com" e-required e-pattern="https?://.+">
 									{{ rateTemp.link || 'ENTER LINK FOR *' + surveygen.RateType + ' ' + rateTemp.name + '*' }}
 								</span><br/><br/>
 							</div>
@@ -191,7 +191,7 @@
 						<div class="col-lg-10 col-lg-offset-1" ng-if="surveygen.sectionId == 3">
 							<div class="margin-top-5 h4 text-primary-dker" ng-repeat="Answer in surveygen.answerButton">
 								<span editable-url="Answer.link" e-style="width: 300px;font-size: 16px;" style="min-width: 200px;"
-								      e-placeholder="e.g. http://example.com" e-required e-pattern="https?://.+">
+								      e-placeholder="e.g. https://example.com" e-required e-pattern="https?://.+">
 									{{ Answer.link || 'ENTER LINK FOR *' + Answer.name + '*' }}
 								</span><br/><br/>
 							</div>

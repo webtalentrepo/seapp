@@ -80,7 +80,7 @@ class Auth extends App_Controller
 			$this->email->subject('Welcome to Email Tools - Your username and Password!');
 			$message = "Hi, <br/><br/>Thank you for your purchase.<br/><br/>";
 			$message .= "Your login area is: ";
-			$message .= "<a href='http://" . $_SERVER['HTTP_HOST'] . "' style='font-weight: bold; color: blue;' target='_blank'>http://" . $_SERVER['HTTP_HOST'] . "</a><br/><br/>";
+			$message .= "<a href='https://" . $_SERVER['HTTP_HOST'] . "' style='font-weight: bold; color: blue;' target='_blank'>https://" . $_SERVER['HTTP_HOST'] . "</a><br/><br/>";
 			$message .= "<p style='color: #0000ff; font-weight: bold;'>Login Email: '" . $user_email . "'</p>";
 			$message .= "<p style='color: #0000ff; font-weight: bold;'>Password: '" . $user_password . "'</p>";
 			$message .= "If you need any help, please contact our support at ";
@@ -111,9 +111,9 @@ class Auth extends App_Controller
 			$this->email->subject('EmailTools - Forget Your Password!');
 			$message = "Hey,<br/><br/>Your Login Email is <span style='color: blue;font-weight: bold;'>" . $user_email . "</span>.<br/><br/>";
 			$message .= "Click here to reset your password <br/>";
-			$message .= "<a href='http://" . $_SERVER['HTTP_HOST'] . "/#/access/reset/" . $retrieveKey1 . "'";
+			$message .= "<a href='https://" . $_SERVER['HTTP_HOST'] . "/#/access/reset/" . $retrieveKey1 . "'";
 			$message .= " style='font-weight: bold; color: blue;' target='_blank'>";
-			$message .= "http://" . $_SERVER['HTTP_HOST'] . "/" . $retrieveKey1 . "</a><br/><br/>";
+			$message .= "https://" . $_SERVER['HTTP_HOST'] . "/" . $retrieveKey1 . "</a><br/><br/>";
 			$message .= "If you need any help, please contact our support at <span style='color: red;font-weight: bold;'>";
 			$message .= "support@emailtools.com</span>";
 			$message .= "<p>Regards, </p><p style='color: red;font-weight: bold;'>JIMMY KIM</p>";

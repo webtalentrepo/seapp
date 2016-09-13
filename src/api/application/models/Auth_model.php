@@ -35,7 +35,7 @@ class Auth_model extends CI_Model
 			->get($this->getUserTable());
 		if ($query->num_rows() && $query->num_rows() > 0) {
 			$reData = $query->row_array();
-			$target_url = "http://" . $_SERVER["SERVER_NAME"] . '/' . UPLOAD_DIR;
+			$target_url = "https://" . $_SERVER["SERVER_NAME"] . '/' . UPLOAD_DIR;
 			$target_path = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR;
 			$reData['photo'] = $target_url . 'photos/no_photo.jpg';
 			$file_path = $target_path . 'photos/a0' . $reData['u_id'] . '.png';

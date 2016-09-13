@@ -106,7 +106,7 @@ class Survey_model extends CI_Model
 				$origin_file = $target_path . $data['temp_file'];
 				$to_file = $target_path . $file_name . '.png';
 				copy($origin_file, $to_file);
-				$data['temp_image'] = 'http://' . $_SERVER['SERVER_NAME'] . UPLOAD_DIR . 'survey/' . $file_name . '.png';
+				$data['temp_image'] = 'https://' . $_SERVER['SERVER_NAME'] . UPLOAD_DIR . 'survey/' . $file_name . '.png';
 				$data['temp_file'] = $file_name . '.png';
 			}
 			$this->db->insert($this->survey_data_table, $data);
