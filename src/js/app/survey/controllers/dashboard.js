@@ -71,7 +71,7 @@ app_survey.controller('DashboardSurveyController', [
 			tempCode += '<td align="center" style="padding-top: 25px;min-width: 400px;"><h1 style="font-weight: bold;font-size: 32px;">' + temp.temp_header + '</h1></td>';
 			tempCode += '</tr>';
 			if (temp.temp_image != '') {
-				tempCode += '<tr><td><a href="' + temp.temp_image + '">';
+				tempCode += '<tr><td align="center" style="text-align: center;"><a href="' + temp.temp_image + '" target="_blank" style="text-align: center;width: 100%;">';
 				tempCode += '<img src="' + temp.temp_image + '" alt="Click here view the image." style="cursor: pointer;vertical-align: middle;display: inline-block;max-width: 98%;height: auto;padding: 4px;line-height: 1.42857143;background-color: #fff;border: 1px solid #ddd;border-radius: 4px;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;transition: all .2s ease-in-out;">';
 				tempCode += '</a></td></tr>';
 			}
