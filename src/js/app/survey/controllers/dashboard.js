@@ -72,7 +72,7 @@ app_survey.controller('DashboardSurveyController', [
 			tempCode += '</tr>';
 			if (temp.temp_image != '') {
 				tempCode += '<tr><td><a href="' + temp.temp_image + '">';
-				tempCode += '<img src="' + temp.temp_image + '" alt="Click here show the image." style="cursor: pointer;vertical-align: middle;display: inline-block;max-width: 98%;height: auto;padding: 4px;line-height: 1.42857143;background-color: #fff;border: 1px solid #ddd;border-radius: 4px;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;transition: all .2s ease-in-out;">';
+				tempCode += '<img src="' + temp.temp_image + '" alt="Click here view the image." style="cursor: pointer;vertical-align: middle;display: inline-block;max-width: 98%;height: auto;padding: 4px;line-height: 1.42857143;background-color: #fff;border: 1px solid #ddd;border-radius: 4px;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;transition: all .2s ease-in-out;">';
 				tempCode += '</a></td></tr>';
 			}
 			if (temp.section_id == 1 || temp.section_id == 2) {
