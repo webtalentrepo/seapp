@@ -84,7 +84,7 @@ app_survey.controller('DashboardSurveyController', [
 					var href_flag = temp.key_url + '_COL_' + temp.temp_data[i].name + '_COL_' + i + '_COL_' + temp.temp_data[i].link;
 					var href_url = APP_SETTINGS.TARGET_URL + btoa(href_flag);
 					tempCode += '<tr><td align="center" style="padding-top: ' + p + 'px;">';
-					tempCode += '<a href="' + href_url + '" style="min-width: 200px;display: inline-block;margin-top: 5px;color: #fff !important;background-color: #23b7e5;border-color: #23b7e5;padding: 10px 16px;font-size: 18px;line-height: 1.3333333;border-radius: 6px;cursor: pointer;text-align: center;text-decoration: none;">';
+					tempCode += '<a href="' + href_url + '" target="_blank" style="min-width: 200px;display: inline-block;margin-top: 5px;color: #fff !important;background-color: #23b7e5;border-color: #23b7e5;padding: 10px 16px;font-size: 18px;line-height: 1.3333333;border-radius: 6px;cursor: pointer;text-align: center;text-decoration: none;">';
 					tempCode += temp.temp_data[i].name + '</a></td></tr>';
 				}
 			} else if (temp.section_id == 2) {
@@ -93,7 +93,7 @@ app_survey.controller('DashboardSurveyController', [
 					tempCode += '<div align="center" style="display: inline !important;vertical-align: middle;width: 47px;height: 45px;">';
 					var href_flag2 = temp.key_url + '_COL_' + temp.temp_data.rateTemp[j].name + '_COL_' + j + '_COL_' + temp.temp_data.rateTemp[j].link;
 					var href_url2 = APP_SETTINGS.TARGET_URL + btoa(href_flag2);
-					tempCode += '<a href="' + href_url2 + '" style="display: inline-block;color: #8d949c;font-size :18px !important; font-weight: normal; line-height: 1.3333333;text-decoration: none;cursor: pointer;padding: 10px 16px;margin-right: 2px;text-align: center;background-color: #fff;border: 1px solid #ccc;border-bottom: 2px solid #ccc;border-radius: 5px;-webkit-box-shadow: -1px 2px 2px #ddd;-moz-box-shadow: -1px 2px 2px #ddd;box-shadow: -1px 2px 2px #ddd;">';
+					tempCode += '<a href="' + href_url2 + '" target="_blank" style="display: inline-block;color: #8d949c;font-size :18px !important; font-weight: normal; line-height: 1.3333333;text-decoration: none;cursor: pointer;padding: 10px 16px;margin-right: 2px;text-align: center;background-color: #fff;border: 1px solid #ccc;border-bottom: 2px solid #ccc;border-radius: 5px;-webkit-box-shadow: -1px 2px 2px #ddd;-moz-box-shadow: -1px 2px 2px #ddd;box-shadow: -1px 2px 2px #ddd;">';
 					tempCode += ((j * 1) + 1) + '</a>';
 					tempCode += '</div>';
 				}
@@ -107,12 +107,12 @@ app_survey.controller('DashboardSurveyController', [
 				tempCode += '<td align="right" style="padding-right: 20px;">';
 				var href_flag3 = temp.key_url + '_COL_' + temp.temp_data[0].name + '_COL_' + 0 + '_COL_' + temp.temp_data[0].link;
 				var href_url3 = APP_SETTINGS.TARGET_URL + btoa(href_flag3);
-				tempCode += '<a href="' + href_url3 + '" style="min-width: 100px;border-radius: 50px;color: #fff !important;background-color: #27c24c;border-color: #27c24c;font-weight: 500;outline: 0 !important;padding: 15px 25px;font-size: 18px;line-height: 1.3333333;text-align: center;cursor: pointer;text-decoration: none;display: inline-block;">';
+				tempCode += '<a href="' + href_url3 + '" target="_blank" style="min-width: 100px;border-radius: 50px;color: #fff !important;background-color: #27c24c;border-color: #27c24c;font-weight: 500;outline: 0 !important;padding: 15px 25px;font-size: 18px;line-height: 1.3333333;text-align: center;cursor: pointer;text-decoration: none;display: inline-block;">';
 				tempCode += temp.temp_data[0].name + '</a></td>';
 				tempCode += '<td align="left" style="padding-left: 20px;">';
 				href_flag3 = temp.key_url + '_COL_' + temp.temp_data[1].name + '_COL_' + 1 + '_COL_' + temp.temp_data[1].link;
 				href_url3 = APP_SETTINGS.TARGET_URL + btoa(href_flag3);
-				tempCode += '<a href="' + href_url3 + '" style="min-width: 100px;border-radius: 50px;color: #fff !important;background-color: #f05050;border-color: #f05050;font-weight: 500;outline: 0 !important;padding: 15px 25px;font-size: 18px;line-height: 1.3333333;text-align: center;cursor: pointer;text-decoration: none;display: inline-block;">';
+				tempCode += '<a href="' + href_url3 + '" target="_blank" style="min-width: 100px;border-radius: 50px;color: #fff !important;background-color: #f05050;border-color: #f05050;font-weight: 500;outline: 0 !important;padding: 15px 25px;font-size: 18px;line-height: 1.3333333;text-align: center;cursor: pointer;text-decoration: none;display: inline-block;">';
 				tempCode += temp.temp_data[1].name + '</a>';
 				tempCode += '</td></tr></table></td></tr>';
 			}
