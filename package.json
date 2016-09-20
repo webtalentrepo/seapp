@@ -1,5 +1,5 @@
 {
-  "name": "CEImages",
+  "name": "SVEmail",
   "version": "2.0.0",
   "description": "Web application for Custom Email Images.",
   "scripts": {
@@ -12,18 +12,21 @@
   "dependencies": {
     "grunt-contrib-cssmin": "^0.14.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-usemin": "^3.1.1"
+    "grunt-usemin": "^3.1.1",
+	"grunt-htmlmin": "^0.1.4"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
+    "grunt": "^1.0.1",
     "grunt-bower-install-simple": "^0.9.3",
     "grunt-bump": "0.0.15",
     "grunt-changelog": "^0.2.2",
-    "grunt-contrib-clean": "^0.6.0",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-copy": "^0.5.0",
-    "grunt-contrib-htmlmin": "^0.3.0",
+    "grunt-contrib-htmlmin": "^2.0.0",
     "grunt-contrib-uglify": "^0.5.1",
+    "grunt-htmlmin": "^0.1.4",
     "grunt-newer": "^1.2.0",
     "grunt-recess": "^1.0.0",
     "grunt-swig": "^0.2.1",
