@@ -89,11 +89,12 @@ app_survey.controller('DashboardSurveyController', [
 				}
 			} else if (temp.section_id == 2) {
 				tempCode += '<tr><td><br/><br/></td></tr><tr><td height="47px" style="height: 47px;" align="center">';
+				var b = temp.temp_data.rateType == 'circle' ? 50 : 5;
 				for (var j in temp.temp_data.rateTemp) {
 					tempCode += '<div align="center" style="display: inline !important;vertical-align: middle;width: 47px;height: 45px;">';
 					var href_flag2 = temp.key_url + '_COL_' + temp.temp_data.rateTemp[j].name + '_COL_' + j + '_COL_' + temp.temp_data.rateTemp[j].link;
 					var href_url2 = APP_SETTINGS.TARGET_URL + btoa(href_flag2);
-					tempCode += '<a href="' + href_url2 + '" target="_blank" style="display: inline-block;color: #8d949c;font-size :18px !important; font-weight: normal; line-height: 1.3333333;text-decoration: none;cursor: pointer;padding: 10px 16px;margin-right: 2px;text-align: center;background-color: #fff;border: 1px solid #ccc;border-bottom: 2px solid #ccc;border-radius: 5px;-webkit-box-shadow: -1px 2px 2px #ddd;-moz-box-shadow: -1px 2px 2px #ddd;box-shadow: -1px 2px 2px #ddd;">';
+					tempCode += '<a href="' + href_url2 + '" target="_blank" style="display: inline-block;color: #8d949c;font-size :18px !important; font-weight: normal; line-height: 1.3333333;text-decoration: none;cursor: pointer;padding: 10px 16px;margin-right: 2px;text-align: center;background-color: #fff;border: 1px solid #ccc;border-bottom: 2px solid #ccc;border-radius: ' + b + 'px;-webkit-box-shadow: -1px 2px 2px #ddd;-moz-box-shadow: -1px 2px 2px #ddd;box-shadow: -1px 2px 2px #ddd;">';
 					tempCode += ((j * 1) + 1) + '</a>';
 					tempCode += '</div>';
 				}

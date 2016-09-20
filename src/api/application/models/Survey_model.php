@@ -118,8 +118,19 @@ class Survey_model extends CI_Model
 	
 	public function deleteTemp($id)
 	{
-		$this->db->where('id', $id);
-		$this->db->delete($this->survey_data_table);
+		$data = $this->getDataById($id);
+		if ($data['result'] == 'success') {
+			$this->db->where('id', $id);
+			$this->db->delete($this->survey_data_table);
+			$row = $data['data'];
+			$this->db->where('key_url', $row['key_url']);
+			$this->db->delete($this->survey_click_table);
+			$temp_file = $row['temp_file'];
+			$target_file = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR . 'survey/' . $temp_file;
+			if ($temp_file != '' && file_exists($target_file)) {
+				unlink($target_file);
+			}
+		}
 	}
 	
 	/**
