@@ -68,7 +68,7 @@ app_survey.controller('DashboardSurveyController', [
 			tempCode += '<tr><td align="center" width="100%">';
 			tempCode += '<table align="center" style="color: #111; font-family: Helvetica, Arial, sans-serif;border-radius: 4px;border: 1px solid #ddd;max-width:600px;margin: 30px auto; padding: 20px;">';
 			tempCode += '<tr>';
-			tempCode += '<td align="center" style="padding-top: 25px;min-width: 400px;"><h1 style="font-weight: bold;font-size: 32px;">' + temp.temp_header + '</h1></td>';
+			tempCode += '<td align="center" style="padding-top: 25px;min-width: 400px;"><h1 style="font-weight: bold;font-size: 32px;line-height: 1.3333333;">' + temp.temp_header + '</h1></td>';
 			tempCode += '</tr>';
 			if (temp.temp_image != '') {
 				tempCode += '<tr><td align="center" style="text-align: center;"><a href="' + temp.temp_image + '" target="_blank" style="text-align: center;width: 100%;">';
@@ -76,7 +76,7 @@ app_survey.controller('DashboardSurveyController', [
 				tempCode += '</a></td></tr>';
 			}
 			if (temp.section_id == 1 || temp.section_id == 2) {
-				tempCode += '<tr><td align="center" style="padding-top: 25px;"><h4 style="font-weight: normal;font-size: 22px;">' + temp.temp_header1 + '</h4></td></tr>';
+				tempCode += '<tr><td align="center" style="padding-top: 25px;"><h4 style="font-weight: normal;font-size: 22px;line-height: 1.3333333;">' + temp.temp_header1 + '</h4></td></tr>';
 			}
 			if (temp.section_id == 1) {
 				for (var i in temp.temp_data) {
