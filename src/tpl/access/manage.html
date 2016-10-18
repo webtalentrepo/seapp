@@ -19,12 +19,13 @@
         <div class="gridStyle">
             <table class="table table-bordered table-hover table-condensed bg-white-only">
                 <tr style="font-weight: bold">
-                    <td style="width:15%">First Name</td>
-                    <td style="width:15%">Last Name</td>
-                    <td style="width:20%">User Email</td>
-                    <td style="width:15%">User Password</td>
-                    <td style="width:8%">Admin Status</td>
-                    <td style="width:8%">Edit</td>
+	                <td style="width:10%">First Name</td>
+	                <td style="width:10%">Last Name</td>
+	                <td style="width:20%">User Email</td>
+	                <td style="width:10%">User Password</td>
+	                <td style="width:15%">Registered Date</td>
+	                <td style="width:8%">Admin Status</td>
+	                <td style="width:8%">Edit</td>
                 </tr>
                 <tr dir-paginate="user in manage.users|orderBy:sortKey:reverse|filter:searchText|itemsPerPage:10"
                     current-page="pagination.current">
@@ -56,6 +57,9 @@
                             {{ user.user_password || 'empty' }}
                         </span>
                     </td>
+	                <td class="v-middle">
+		                {{ user.change_date }}
+	                </td>
                     <td class="v-middle">
                         <!-- editable username (text with validation) -->
                         <span editable-radiolist="user.user_flag" e-name="user_flag" e-form="rowform"

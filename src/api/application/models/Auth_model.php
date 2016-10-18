@@ -69,6 +69,7 @@ class Auth_model extends CI_Model
 					$reArray[$key]['user_email'] = $row['u_email'];
 					$reArray[$key]['user_password'] = $row['u_password'];
 					$reArray[$key]['user_flag'] = $row['account_type'];
+					$reArray[$key]['change_date'] = date("m/d/Y H:i:s", strtotime($row['change_date']));
 				}
 			}
 			return $reArray;
@@ -110,7 +111,8 @@ class Auth_model extends CI_Model
 				'u_password' => $user_password,
 				'account_type' => $user_flag,
 				'u_active' => 0,
-				'u_check' => 1
+				'u_check' => 1,
+				'change_date' => date('Y-m-d H:i:s')
 			);
 			$this->db->insert($this->getUserTable(), $insert_data);
 		} else {
@@ -120,7 +122,8 @@ class Auth_model extends CI_Model
 			$update_data = array(
 				'u_fname' => $first_name,
 				'u_lname' => $last_name,
-				'u_email' => $user_email
+				'u_email' => $user_email,
+				'change_date' => date('Y-m-d H:i:s')
 			);
 			if ($check_data[0]['u_password'] != $user_password) {
 				$update_data['u_password'] = $user_password;

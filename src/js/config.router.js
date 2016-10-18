@@ -135,13 +135,13 @@ angular.module('app')
 						controllerAs: 'signin',
 						resolve: load(['js/app/access/controllers/signin.js'])
 					})
-					.state('access.signup', {
-						url: '/signup',
-						templateUrl: 'tpl/access/signup.html',
-						controller: 'SignupFormController',
-						controllerAs: 'signup',
-						resolve: load(['js/app/access/controllers/signup.js'])
-					})
+					// .state('access.signup', {
+					// 	url: '/signup',
+					// 	templateUrl: 'tpl/access/signup.html',
+					// 	controller: 'SignupFormController',
+					// 	controllerAs: 'signup',
+					// 	resolve: load(['js/app/access/controllers/signup.js'])
+					// })
 					.state('access.forgotpwd', {
 						url: '/forgotpwd',
 						templateUrl: 'tpl/access/forgotpwd.html',
