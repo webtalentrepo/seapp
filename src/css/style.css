@@ -542,7 +542,7 @@ a.disabled {
 	filter: alpha(opacity=0);
 	-webkit-transition: all .2s ease-in-out;
 	transition: all .2s ease-in-out;
-	margin: 90px 0 0;
+	margin: 20% 0 0;
 	padding: 7px 14px;
 	background-color: transparent;
 }
@@ -555,8 +555,9 @@ a.disabled {
 	filter: alpha(opacity=0);
 	-webkit-transition: all .2s ease-in-out;
 	transition: all .2s ease-in-out;
-	margin: 120px 0 0;
+	margin: 15% 0 0;
 	padding: 7px 14px;
+	bottom: 0;
 }
 
 .panel-default.select-preview:hover .panel-body, .panel-default.select-preview:hover .panel-heading {

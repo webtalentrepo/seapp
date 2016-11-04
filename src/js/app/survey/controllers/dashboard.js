@@ -89,14 +89,28 @@ app_survey.controller('DashboardSurveyController', [
 				}
 			} else if (temp.section_id == 2) {
 				tempCode += '<tr><td><br/><br/></td></tr><tr><td height="47px" style="height: 47px;" align="center">';
-				var b = temp.temp_data.rateType == 'circle' ? 50 : 5;
 				for (var j in temp.temp_data.rateTemp) {
-					tempCode += '<div align="center" style="display: inline !important;vertical-align: middle;width: 47px;height: 45px;">';
-					var href_flag2 = temp.key_url + '_COL_' + temp.temp_data.rateTemp[j].name + '_COL_' + j + '_COL_' + temp.temp_data.rateTemp[j].link;
+					var rateValue = ((j * 1) + 1);
+					if (isNaN(rateValue)) {
+						continue;
+					}
+					var iconType = '&#9734;';
+					if (temp.temp_data.rateType == 'heart') {
+						iconType = '&#9825;';
+					}
+					if (temp.temp_data.rateType == 'circle') {
+						iconType = '&#9786;';
+					}
+					if (temp.temp_data.rateType == 'square') {
+						iconType = '&#9744;';
+					}
+					var href_flag2 = temp.key_url + '_COL_' + encodeURIComponent(temp.temp_data.rateTemp[j].name) + '_COL_' + j + '_COL_' + temp.temp_data.rateTemp[j].link;
 					var href_url2 = APP_SETTINGS.TARGET_URL + btoa(href_flag2);
-					tempCode += '<a href="' + href_url2 + '" target="_blank" style="display: inline-block;color: #8d949c;font-size :18px !important; font-weight: normal; line-height: 1.3333333;text-decoration: none;cursor: pointer;padding: 10px 16px;margin-right: 2px;text-align: center;background-color: #fff;border: 1px solid #ccc;border-bottom: 2px solid #ccc;border-radius: ' + b + 'px;-webkit-box-shadow: -1px 2px 2px #ddd;-moz-box-shadow: -1px 2px 2px #ddd;box-shadow: -1px 2px 2px #ddd;">';
-					tempCode += ((j * 1) + 1) + '</a>';
-					tempCode += '</div>';
+					tempCode += '<p align="center" style="display: inline !important;vertical-align: middle;width: 47px;height: 45px;">';
+					tempCode += '<a class="starIcon" href="' + href_url2 + '" onclick="javascript:for(var d = 0; d < ' + temp.temp_data.rateTemp.length + ';d ++){document.getElementsByClassName(\'starIcon\')[d].style.color = \'#8d949c\';}for(var i = 0; i < ' + rateValue + ';i ++){document.getElementsByClassName(\'starIcon\')[i].style.color = this.style.color == \'yellow\' ? \'#8d949c\' : \'yellow\';};"';
+					tempCode +=' target="_blank" style="display: inline-block;color: #8d949c;font-size :500% !important; font-weight: normal; text-decoration: none;cursor: pointer;padding: 0 !important;margin-right: 2px;text-align: center;background-color: #fff;">';
+					tempCode += iconType + '</a>';
+					tempCode += '</p>';
 				}
 				tempCode += '</td></tr><tr><td><br/></td></tr><tr><td align="center" width="100%" style="padding: 3px 5%;">';
 				tempCode += '<div style="float: left;font-weight: normal;color: #8d949c;font-size: 14px;">' + temp.temp_data.rateLabel.left + '</div>';
