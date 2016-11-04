@@ -80,8 +80,11 @@ app_survey.controller('DashboardSurveyController', [
 			}
 			if (temp.section_id == 1) {
 				for (var i in temp.temp_data) {
+					if (temp.temp_data[i].name == "" || temp.temp_data[i].name == null || temp.temp_data[i].name == undefined) {
+						continue;
+					}
 					var p = i == 0 ? 25 : 5;
-					var href_flag = temp.key_url + '_COL_' + temp.temp_data[i].name + '_COL_' + i + '_COL_' + temp.temp_data[i].link;
+					var href_flag = temp.key_url + '_COL_' + encodeURIComponent(temp.temp_data[i].name) + '_COL_' + i + '_COL_' + temp.temp_data[i].link;
 					var href_url = APP_SETTINGS.TARGET_URL + btoa(href_flag);
 					tempCode += '<tr><td align="center" style="padding-top: ' + p + 'px;">';
 					tempCode += '<a href="' + href_url + '" target="_blank" style="min-width: 200px;display: inline-block;margin-top: 5px;color: #fff !important;background-color: #23b7e5;border-color: #23b7e5;padding: 10px 16px;font-size: 18px;line-height: 1.3333333;border-radius: 6px;cursor: pointer;text-align: center;text-decoration: none;">';
