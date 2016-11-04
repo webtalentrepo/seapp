@@ -84,5 +84,8 @@ defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
-defined('UPLOAD_DIR') OR define('UPLOAD_DIR', '/theme_survey/src/api/uploads/');
-//defined('UPLOAD_DIR') OR define('UPLOAD_DIR', '/api/uploads/');
+//defined('UPLOAD_DIR') OR define('UPLOAD_DIR', '/theme_survey/src/api/uploads/');
+defined('UPLOAD_DIR') OR define('UPLOAD_DIR', '/api/uploads/');
+defined('PRODUCT_NAME') OR define('PRODUCT_NAME', 'Surveys For Email');
+defined('SUPPORT_URL') OR define('SUPPORT_URL', 'support.urgencytimer.com');
+defined('SUPPORT_MAIL') OR define('SUPPORT_MAIL', 'support@urgencytimer.com');

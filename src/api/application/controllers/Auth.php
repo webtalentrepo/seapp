@@ -18,8 +18,8 @@ class Auth extends App_Controller
 		$this->load->library('email', array(
 			'protocol' => 'smtp',
 			'smtp_host' => 'smtp.postmarkapp.com',
-			'smtp_user' => 'e9182580-2bf4-4417-b076-5c911d9ba31d',
-			'smtp_pass' => 'e9182580-2bf4-4417-b076-5c911d9ba31d',
+			'smtp_user' => '6fe4bab1-3714-4ad0-94a4-a7789e2730c3',
+			'smtp_pass' => '6fe4bab1-3714-4ad0-94a4-a7789e2730c3',
 			'smtp_timeout' => 7,
 			'mailtype' => 'html'
 		));
@@ -77,14 +77,22 @@ class Auth extends App_Controller
 			$this->email->set_newline("\r\n");
 			$this->email->from("login@emailtools.com");
 			$this->email->to($user_email);
-			$this->email->subject('Welcome to Email Tools - Your username and Password!');
-			$message = "Hi, <br/><br/>Thank you for your purchase.<br/><br/>";
-			$message .= "Your login area is: ";
-			$message .= "<a href='https://" . $_SERVER['HTTP_HOST'] . "' style='font-weight: bold; color: blue;' target='_blank'>https://" . $_SERVER['HTTP_HOST'] . "</a><br/><br/>";
-			$message .= "<p style='color: #0000ff; font-weight: bold;'>Login Email: '" . $user_email . "'</p>";
+			$this->email->subject('Welcome to ' . PRODUCT_NAME . '!');
+			$message = "Hey, <br/>Thank you for your purchase of " . PRODUCT_NAME;
+			$message .= " and welcome to the <a href='http://www.snaptactix.com'>Snaptactix</a> team!<br/>";
+			$message .= "We know you probably can’t wait to get started, so your login credentials are below:";
+			$message .= "<p style='color: #0000ff; font-weight: bold;'>Username: '" . $user_email . "'</p>";
 			$message .= "<p style='color: #0000ff; font-weight: bold;'>Password: '" . $user_password . "'</p>";
-			$message .= "If you need any help, please contact our support at ";
-			$message .= "<span style='color: #FF0000;font-weight: bold;'>support@emailtools.com</span><br/><br/>Thank you,<br/><br/>JIMMY KIM";
+			$message .= "<p>Remember, your username and password are case sensitive.</p>";
+			$message .= "Click <a href='https://" . $_SERVER['HTTP_HOST'] . "' style='font-weight: bold; color: blue;' target='_blank'>here</a>";
+			$message .= " to access the members login page.<br/><br/>";
+			$message .= "If you have questions while using " . PRODUCT_NAME . ", please visit our FAQ page URL - ";
+			$message .= "<a href='http://" . SUPPORT_URL . "' style='font-weight: bold; color: blue;' target='_blank'>" . SUPPORT_URL . "</a><br/>";
+			$message .= "If you don’t find the answer you are seeking, our ";
+			$message .= "<a href='mailto:" . SUPPORT_MAIL . "' style='color: #FF0000;font-weight: bold;' target='_blank'>" . SUPPORT_MAIL . "</a>";
+			$message .= " is available 9am-5pm PST, and would be happy to assist!<br/><br/>";
+			$message .= "Thanks again for joining! We look forward to having you as a member for many years ahead.<br/><br/>";
+			$message .= "All the best,<br/><span style='color: #FF0000;font-weight: bold;'>Jimmy Kim & " . PRODUCT_NAME . "</span> Support Team";
 			$this->email->message($message);
 			if ($this->email->send()) {
 				$rData = "success";
@@ -108,15 +116,18 @@ class Auth extends App_Controller
 			$this->email->set_newline("\r\n");
 			$this->email->from("login@emailtools.com");
 			$this->email->to($user_email);
-			$this->email->subject('EmailTools - Forget Your Password!');
+			$this->email->subject(PRODUCT_NAME . ' - Forget Your Password!');
 			$message = "Hey,<br/><br/>Your Login Email is <span style='color: blue;font-weight: bold;'>" . $user_email . "</span>.<br/><br/>";
 			$message .= "Click here to reset your password <br/>";
 			$message .= "<a href='https://" . $_SERVER['HTTP_HOST'] . "/#/access/reset/" . $retrieveKey1 . "'";
 			$message .= " style='font-weight: bold; color: blue;' target='_blank'>";
 			$message .= "https://" . $_SERVER['HTTP_HOST'] . "/" . $retrieveKey1 . "</a><br/><br/>";
-			$message .= "If you need any help, please contact our support at <span style='color: red;font-weight: bold;'>";
-			$message .= "support@emailtools.com</span>";
-			$message .= "<p>Regards, </p><p style='color: red;font-weight: bold;'>JIMMY KIM</p>";
+			$message .= "If you have questions while using " . PRODUCT_NAME . ", please visit our FAQ page URL - ";
+			$message .= "<a href='http://" . SUPPORT_URL . "' style='font-weight: bold; color: blue;' target='_blank'>" . SUPPORT_URL . "</a><br/>";
+			$message .= "If you don’t find the answer you are seeking, our ";
+			$message .= "<a href='mailto:" . SUPPORT_MAIL . "' style='color: #FF0000;font-weight: bold;' target='_blank'>" . SUPPORT_MAIL . "</a>";
+			$message .= " is available 9am-5pm PST, and would be happy to assist!<br/><br/>";
+			$message .= "All the best,<br/><span style='color: #FF0000;font-weight: bold;'>Jimmy Kim & " . PRODUCT_NAME . "</span> Support Team";
 			$this->email->message($message);
 			if ($this->email->send()) {
 				$rData = array(
